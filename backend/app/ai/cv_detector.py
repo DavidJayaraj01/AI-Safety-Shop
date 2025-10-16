@@ -13,6 +13,7 @@ import numpy as np
 try:
     from ultralytics import YOLO
     import cv2
+    import torch
     YOLO_AVAILABLE = True
 except ImportError:
     YOLO_AVAILABLE = False
@@ -62,6 +63,8 @@ class CVDetector:
             if model_path.exists():
                 try:
                     logger.info(f"Loading YOLO model from {model_path}")
+                    # Add safe globals for ultralytics models to fix PyTorch 2.6 security change
+                    torch.serialization.add_safe_globals(['ultralytics.nn.tasks.DetectionModel'])
                     self.yolo_model = YOLO(str(model_path))
                     self.model_path = str(model_path)
                     self.initialized = True
