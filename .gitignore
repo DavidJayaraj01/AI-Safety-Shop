@@ -1,12 +1,11 @@
 # Python
-
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
 .Python
 build/
-git rm -r --cached venv backend/venv __pycache__develop-eggs/
+develop-eggs/
 dist/
 downloads/
 eggs/
@@ -35,6 +34,7 @@ yarn-error.log*
 pnpm-debug.log*
 frontend/node_modules/
 frontend/dist/
+frontend/build/
 
 # IDEs
 .vscode/
@@ -59,3 +59,8 @@ frontend/dist/
 
 # OS
 Thumbs.db
+
+# Test coverage
+.coverage
+htmlcov/
+.pytest_cache/
