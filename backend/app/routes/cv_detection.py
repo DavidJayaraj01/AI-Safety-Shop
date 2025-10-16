@@ -564,9 +564,10 @@ async def get_stream_status():
     Check if camera streaming is available and get YOLO model info
     """
     try:
-        cap = cv2.VideoCapture(0)
-        is_available = cap.isOpened()
-        cap.release()
+        # Check if camera device exists instead of trying to open it
+        # This avoids conflicts with active streams
+        import os
+        camera_available = os.path.exists("/dev/video0")
         
         # Get YOLO model information
         model_info = {
@@ -582,10 +583,10 @@ async def get_stream_status():
             model_info["num_classes"] = len(cv_detector.yolo_model.names) if cv_detector.yolo_model.names else 0
         
         return {
-            "status": "available" if is_available else "unavailable",
-            "camera_available": is_available,
+            "status": "available" if camera_available else "unavailable",
+            "camera_available": camera_available,
             "yolo_model": model_info,
-            "message": "Camera ready for YOLOv8 streaming" if is_available else "No camera detected",
+            "message": "Camera ready for YOLOv8 streaming" if camera_available else "No camera detected",
             "stream_endpoint": "/cv/stream/live?camera_id=0"
         }
     except Exception as e:

@@ -239,7 +239,20 @@ const CVMonitoring: React.FC = () => {
                   style={{ maxHeight: '720px', objectFit: 'contain' }}
                   onError={(e) => {
                     console.error('Stream error:', e);
-                    toast.error('Failed to load camera stream');
+                    // Auto-retry after a brief delay instead of immediately showing error
+                    setTimeout(() => {
+                      const img = e.target as HTMLImageElement;
+                      if (img && showLiveCamera) {
+                        // Force reload the image by changing the src slightly
+                        const url = new URL(img.src);
+                        url.searchParams.set('ts', Date.now().toString());
+                        img.src = url.toString();
+                      }
+                    }, 2000);
+                  }}
+                  onLoad={() => {
+                    // Clear any previous error messages when stream loads successfully
+                    console.log('Camera stream loaded successfully');
                   }}
                 />
               </div>
