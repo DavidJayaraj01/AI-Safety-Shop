@@ -6,7 +6,7 @@ from typing import List
 import json
 
 from app.db.database import init_db, close_db
-from app.routes import sensors, alerts, workers, ai_detection, reports, settings, cv_detection
+from app.routes import sensors, alerts, workers, ai_detection, reports, settings, cv_detection, arduino_sensors
 
 # Configure logging
 logging.basicConfig(
@@ -83,6 +83,7 @@ app.include_router(ai_detection.router, prefix="/ai", tags=["AI Detection"])
 app.include_router(reports.router, prefix="/reports", tags=["Reports"])
 app.include_router(settings.router, prefix="/settings", tags=["Settings"])
 app.include_router(cv_detection.router, tags=["CV Detection"])
+app.include_router(arduino_sensors.router, prefix="/api", tags=["Arduino Sensors"])
 
 # Root endpoint
 @app.get("/")

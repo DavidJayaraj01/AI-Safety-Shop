@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Flame,
   Thermometer,
   Activity,
   Ruler,
   CreditCard,
-  Wind,
-  TrendingUp,
-  Users,
+  Droplets,
   AlertTriangle
 } from 'lucide-react';
 import SensorCard from '../components/SensorCard';
@@ -15,13 +13,15 @@ import Chart from '../components/Chart';
 import AlertPanel from '../components/AlertPanel';
 import ModeSwitch from '../components/ModeSwitch';
 import { useModeContext } from '../context/ModeContext';
-import { sensorsApi } from '../services/api';
+import { arduinoSensorsApi } from '../services/api';
+import toast from 'react-hot-toast';
 
 const Dashboard = () => {
-  const { mode, modeConfig } = useModeContext();
-  const [sensors, setSensors] = useState([]);
-  const [sensorHistory, setSensorHistory] = useState({});
-  const [rfidLogs, setRfidLogs] = useState([]);
+  const { } = useModeContext();
+  const [sensors, setSensors] = useState<any[]>([]);
+  const [sensorHistory, setSensorHistory] = useState<any>({});
+  const [rfidTag, setRfidTag] = useState('None');
+  const [isConnected, setIsConnected] = useState(false);
   const [statistics, setStatistics] = useState({
     totalWorkers: 0,
     activeAlerts: 0,
@@ -30,15 +30,8 @@ const Dashboard = () => {
   });
   const [isLoading, setIsLoading] = useState(true);
 
-  // Sensor configurations
+  // Sensor configurations matching Arduino output
   const sensorConfig = {
-    gas: {
-      name: 'Gas Sensor',
-      type: 'gas',
-      unit: 'ppm',
-      icon: Flame,
-      threshold: { warning: 50, danger: 100 }
-    },
     temperature: {
       name: 'Temperature',
       type: 'temperature',
@@ -46,95 +39,167 @@ const Dashboard = () => {
       icon: Thermometer,
       threshold: { warning: 35, danger: 45 }
     },
-    vibration: {
-      name: 'Vibration',
-      type: 'vibration',
-      unit: 'g',
-      icon: Activity,
-      threshold: { warning: 5, danger: 10 }
+    humidity: {
+      name: 'Humidity',
+      type: 'humidity',
+      unit: '%',
+      icon: Droplets,
+      threshold: { warning: 70, danger: 85 }
     },
-    ultrasonic: {
-      name: 'Proximity',
-      type: 'ultrasonic',
+    smoke: {
+      name: 'Smoke Level',
+      type: 'smoke',
+      unit: 'ppm',
+      icon: Flame,
+      threshold: { warning: 300, danger: 500 }
+    },
+    distance: {
+      name: 'Distance',
+      type: 'distance',
       unit: 'cm',
       icon: Ruler,
       threshold: { warning: 50, danger: 20 }
     },
     rfid: {
-      name: 'RFID Access',
+      name: 'RFID Tag',
       type: 'rfid',
-      unit: 'workers',
+      unit: '',
       icon: CreditCard,
       threshold: null
-    },
-    environmental: {
-      name: 'Air Quality',
-      type: 'environmental',
-      unit: 'AQI',
-      icon: Wind,
-      threshold: { warning: 100, danger: 150 }
     }
   };
 
   useEffect(() => {
-    fetchDashboardData();
-    const interval = setInterval(fetchDashboardData, 5000); // Update every 5 seconds
+    fetchArduinoData();
+    const interval = setInterval(fetchArduinoData, 2000); // Update every 2 seconds for real-time data
     return () => clearInterval(interval);
   }, []);
 
-  const fetchDashboardData = async () => {
+  const fetchArduinoData = async () => {
     try {
-      const [sensorsResponse, historyResponse, rfidResponse, statsResponse] = await Promise.all([
-        sensorsApi.getAllSensors(),
-        sensorsApi.getSensorHistory(),
-        sensorsApi.getRFIDLogs(),
-        sensorsApi.getStatistics()
-      ]);
-
-      // Transform sensor data
-      const transformedSensors = Object.entries(sensorsResponse.data || {}).map(([key, data]) => {
-        const config = sensorConfig[key] || {};
-        const status = determineStatus(data.value, config.threshold);
+      const response = await arduinoSensorsApi.getLiveSensorData();
+      
+      if (response.status === 'connected' && response.data) {
+        setIsConnected(true);
         
-        return {
-          id: key,
-          ...config,
-          value: data.value,
-          status,
-          lastUpdate: data.timestamp,
-          trend: data.trend || 'stable'
-        };
-      });
-
-      setSensors(transformedSensors);
-      setSensorHistory(historyResponse.data || {});
-      setRfidLogs(rfidResponse.data || []);
-      setStatistics(statsResponse.data || statistics);
-      setIsLoading(false);
+        // Parse Arduino sensor data
+        // Expected format from Arduino: { temperature: 25.5, humidity: 60, smoke: 150, distance: 30, rfid: "ABC123" }
+        const arduinoData = response.data;
+        
+        // Transform Arduino data to match our sensor format
+        const transformedSensors = Object.entries(sensorConfig).map(([key, config]) => {
+          let value;
+          
+          if (key === 'temperature') {
+            value = parseFloat(arduinoData.temperature || 0);
+          } else if (key === 'humidity') {
+            value = parseFloat(arduinoData.humidity || 0);
+          } else if (key === 'smoke') {
+            value = parseInt(arduinoData.smoke || 0);
+          } else if (key === 'distance') {
+            value = parseFloat(arduinoData.distance || 0);
+          } else if (key === 'rfid') {
+            value = arduinoData.rfid || 'None';
+            setRfidTag(value);
+          }
+          
+          const status = determineStatus(value, config.threshold);
+          
+          return {
+            id: key,
+            ...config,
+            value,
+            status,
+            lastUpdate: new Date().toISOString(),
+            trend: 'stable' // Can be enhanced later with trend analysis
+          };
+        });
+        
+        setSensors(transformedSensors);
+        
+        // Update sensor history for charts
+        updateSensorHistory(arduinoData);
+        
+        // Update statistics
+        const alertCount = transformedSensors.filter(s => s.status === 'danger' || s.status === 'warning').length;
+        setStatistics(prev => ({
+          ...prev,
+          activeAlerts: alertCount,
+          dataPoints: prev.dataPoints + 1
+        }));
+        
+        // Show toast notification for critical alerts
+        const dangerSensors = transformedSensors.filter(s => s.status === 'danger');
+        if (dangerSensors.length > 0) {
+          toast.error(`Critical Alert: ${dangerSensors.map(s => s.name).join(', ')} exceeded danger threshold!`);
+        }
+        
+        setIsLoading(false);
+      } else {
+        // Arduino disconnected
+        setIsConnected(false);
+        if (!isLoading) {
+          toast.error('Arduino connection lost! Using mock data...');
+        }
+        generateMockData();
+      }
     } catch (error) {
-      console.error('Error fetching dashboard data:', error);
-      // Use mock data on error
+      console.error('Error fetching Arduino data:', error);
+      setIsConnected(false);
+      if (!isLoading) {
+        toast.error('Failed to connect to Arduino sensors');
+      }
       generateMockData();
-      setIsLoading(false);
     }
   };
 
-  const determineStatus = (value, threshold) => {
-    if (!threshold) return 'normal';
-    if (value >= threshold.danger) return 'danger';
-    if (value >= threshold.warning) return 'warning';
+  const updateSensorHistory = (data: any) => {
+    const timestamp = new Date().toLocaleTimeString('en-US', {
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit'
+    });
+    
+    setSensorHistory((prev: any) => {
+      const newHistory = { ...prev };
+      const maxDataPoints = 20;
+      
+      // Update history for each sensor
+      ['temperature', 'humidity', 'smoke', 'distance'].forEach(key => {
+        if (!newHistory[key]) {
+          newHistory[key] = [];
+        }
+        
+        newHistory[key] = [
+          ...newHistory[key].slice(-maxDataPoints + 1),
+          {
+            timestamp,
+            value: parseFloat(data[key] || 0)
+          }
+        ];
+      });
+      
+      return newHistory;
+    });
+  };
+
+  const determineStatus = (value: any, threshold: any) => {
+    if (!threshold || value === 'None' || value === null) return 'normal';
+    const numValue = parseFloat(value);
+    if (isNaN(numValue)) return 'normal';
+    if (numValue >= threshold.danger) return 'danger';
+    if (numValue >= threshold.warning) return 'warning';
     return 'normal';
   };
 
   const generateMockData = () => {
     const mockSensors = Object.entries(sensorConfig).map(([key, config]) => {
       let value;
-      if (key === 'gas') value = Math.random() * 120;
+      if (key === 'smoke') value = Math.random() * 600;
       else if (key === 'temperature') value = 20 + Math.random() * 30;
-      else if (key === 'vibration') value = Math.random() * 12;
-      else if (key === 'ultrasonic') value = Math.random() * 100;
-      else if (key === 'environmental') value = Math.random() * 200;
-      else value = Math.floor(Math.random() * 10);
+      else if (key === 'humidity') value = 30 + Math.random() * 60;
+      else if (key === 'distance') value = Math.random() * 100;
+      else if (key === 'rfid') value = 'None';
 
       const status = determineStatus(value, config.threshold);
 
@@ -151,42 +216,32 @@ const Dashboard = () => {
     setSensors(mockSensors);
 
     // Generate mock history
-    const mockHistory = {};
+    const mockHistory: any = {};
     Object.keys(sensorConfig).forEach(key => {
-      mockHistory[key] = Array.from({ length: 20 }, (_, i) => ({
-        timestamp: new Date(Date.now() - (19 - i) * 60000).toLocaleTimeString('en-US', {
-          hour: '2-digit',
-          minute: '2-digit'
-        }),
-        value: Math.random() * 100
-      }));
+      if (key !== 'rfid') {
+        mockHistory[key] = Array.from({ length: 20 }, (_, i) => ({
+          timestamp: new Date(Date.now() - (19 - i) * 60000).toLocaleTimeString('en-US', {
+            hour: '2-digit',
+            minute: '2-digit'
+          }),
+          value: Math.random() * 100
+        }));
+      }
     });
     setSensorHistory(mockHistory);
 
-    // Generate mock RFID logs
-    const mockRfidLogs = Array.from({ length: 5 }, (_, i) => ({
-      id: i + 1,
-      workerId: `W${1000 + i}`,
-      workerName: `Worker ${i + 1}`,
-      action: i % 2 === 0 ? 'entry' : 'exit',
-      timestamp: new Date(Date.now() - i * 300000).toISOString(),
-      location: ['Gate A', 'Gate B', 'Workshop', 'Storage'][Math.floor(Math.random() * 4)]
-    }));
-    setRfidLogs(mockRfidLogs);
-
     setStatistics({
-      totalWorkers: 12,
+      totalWorkers: 0,
       activeAlerts: mockSensors.filter(s => s.status !== 'normal').length,
       systemUptime: 99.8,
-      dataPoints: 15420
+      dataPoints: 0
     });
+    setIsLoading(false);
   };
 
   // Filter sensors based on mode
   const getActiveSensors = () => {
-    return sensors.filter(sensor => 
-      modeConfig.primarySensors.includes(sensor.type)
-    );
+    return sensors;
   };
 
   if (isLoading) {
@@ -201,15 +256,38 @@ const Dashboard = () => {
 
   return (
     <div className="space-y-6">
+      {/* Connection Status Banner */}
+      <div className={`card ${isConnected ? 'bg-success-50 dark:bg-success-900/20 border-2 border-success-300 dark:border-success-700' : 'bg-danger-50 dark:bg-danger-900/20 border-2 border-danger-300 dark:border-danger-700'}`}>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-3">
+            <div className={`h-3 w-3 rounded-full ${isConnected ? 'bg-success-500' : 'bg-danger-500'} animate-pulse`} />
+            <div>
+              <p className="font-semibold text-gray-900 dark:text-white">
+                Arduino {isConnected ? 'Connected' : 'Disconnected'}
+              </p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                {isConnected ? 'Receiving live sensor data from http://10.115.11.112/' : 'Showing mock data - Check Arduino connection'}
+              </p>
+            </div>
+          </div>
+          <div className="text-right">
+            <p className="text-xs text-gray-500 dark:text-gray-400">Current RFID Tag</p>
+            <p className="text-lg font-bold text-gray-900 dark:text-white">{rfidTag}</p>
+          </div>
+        </div>
+      </div>
+
       {/* Statistics Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="card gradient-primary text-white">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm opacity-90">Total Workers</p>
-              <p className="text-3xl font-bold">{statistics.totalWorkers}</p>
+              <p className="text-sm opacity-90">Temperature</p>
+              <p className="text-3xl font-bold">
+                {sensors.find(s => s.type === 'temperature')?.value?.toFixed(1) || '--'}°C
+              </p>
             </div>
-            <Users className="h-10 w-10 opacity-80" />
+            <Thermometer className="h-10 w-10 opacity-80" />
           </div>
         </div>
 
@@ -226,10 +304,12 @@ const Dashboard = () => {
         <div className="card gradient-success text-white">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm opacity-90">System Uptime</p>
-              <p className="text-3xl font-bold">{statistics.systemUptime}%</p>
+              <p className="text-sm opacity-90">Humidity</p>
+              <p className="text-3xl font-bold">
+                {sensors.find(s => s.type === 'humidity')?.value?.toFixed(1) || '--'}%
+              </p>
             </div>
-            <TrendingUp className="h-10 w-10 opacity-80" />
+            <Droplets className="h-10 w-10 opacity-80" />
           </div>
         </div>
 
@@ -237,7 +317,7 @@ const Dashboard = () => {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm opacity-90">Data Points</p>
-              <p className="text-3xl font-bold">{statistics.dataPoints.toLocaleString()}</p>
+              <p className="text-3xl font-bold">{statistics.dataPoints}</p>
             </div>
             <Activity className="h-10 w-10 opacity-80" />
           </div>
@@ -257,9 +337,9 @@ const Dashboard = () => {
       {/* Sensor Cards */}
       <div>
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-          Sensor Monitoring
+          Live Sensor Monitoring
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
           {activeSensors.map(sensor => (
             <SensorCard key={sensor.id} sensor={sensor} />
           ))}
@@ -272,12 +352,13 @@ const Dashboard = () => {
           Real-Time Analytics
         </h2>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {activeSensors.slice(0, 4).map(sensor => (
-            sensorHistory[sensor.id] && (
+          {['temperature', 'humidity', 'smoke', 'distance'].map(sensorType => {
+            const sensor = sensors.find(s => s.type === sensorType);
+            return sensorHistory[sensorType] && sensor && (
               <Chart
-                key={sensor.id}
+                key={sensorType}
                 title={`${sensor.name} Trend`}
-                data={sensorHistory[sensor.id]}
+                data={sensorHistory[sensorType]}
                 dataKey="value"
                 type="line"
                 color={
@@ -286,70 +367,10 @@ const Dashboard = () => {
                   '#22c55e'
                 }
               />
-            )
-          ))}
+            );
+          })}
         </div>
       </div>
-
-      {/* RFID Logs */}
-      {modeConfig.features.accessControl && (
-        <div className="card">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-            Recent RFID Activity
-          </h3>
-          <div className="overflow-x-auto">
-            <table className="min-w-full">
-              <thead>
-                <tr className="border-b border-gray-200 dark:border-slate-700">
-                  <th className="px-4 py-2 text-left text-sm font-semibold text-gray-900 dark:text-white">
-                    Worker
-                  </th>
-                  <th className="px-4 py-2 text-left text-sm font-semibold text-gray-900 dark:text-white">
-                    Action
-                  </th>
-                  <th className="px-4 py-2 text-left text-sm font-semibold text-gray-900 dark:text-white">
-                    Location
-                  </th>
-                  <th className="px-4 py-2 text-left text-sm font-semibold text-gray-900 dark:text-white">
-                    Time
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {rfidLogs.map((log, index) => (
-                  <tr
-                    key={log.id}
-                    className={`border-b border-gray-100 dark:border-slate-700 ${
-                      index % 2 === 0 ? 'bg-gray-50 dark:bg-slate-800/50' : ''
-                    }`}
-                  >
-                    <td className="px-4 py-3 text-sm text-gray-900 dark:text-white">
-                      {log.workerName} ({log.workerId})
-                    </td>
-                    <td className="px-4 py-3 text-sm">
-                      <span
-                        className={`px-2 py-1 rounded-full text-xs font-medium ${
-                          log.action === 'entry'
-                            ? 'bg-success-100 dark:bg-success-900/30 text-success-700 dark:text-success-300'
-                            : 'bg-danger-100 dark:bg-danger-900/30 text-danger-700 dark:text-danger-300'
-                        }`}
-                      >
-                        {log.action.toUpperCase()}
-                      </span>
-                    </td>
-                    <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">
-                      {log.location}
-                    </td>
-                    <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">
-                      {new Date(log.timestamp).toLocaleString()}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      )}
     </div>
   );
 };

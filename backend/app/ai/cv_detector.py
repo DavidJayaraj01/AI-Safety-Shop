@@ -1,18 +1,31 @@
 """
-Computer Vision Detection Service
-Simulates AI-powered safety monitoring similar to Protex AI, Intenseye, and Chooch AI
-In production, this would integrate with actual CV models (YOLO, TensorFlow, etc.)
+Computer Vision Detection Service using YOLO Models
+Real-time safety monitoring with YOLOv8 for PPE detection and workplace safety
 """
 
 import random
 from datetime import datetime
 from typing import List, Dict, Any, Optional
+import logging
+from pathlib import Path
+import numpy as np
+
+try:
+    from ultralytics import YOLO
+    import cv2
+    YOLO_AVAILABLE = True
+except ImportError:
+    YOLO_AVAILABLE = False
+    logging.warning("ultralytics or cv2 not installed. Using mock detection mode.")
+
 from app.models.models import DetectionType, ViolationType, AlertSeverity
+
+logger = logging.getLogger(__name__)
 
 class CVDetector:
     """
     Computer Vision Detector for workplace safety monitoring
-    Simulates real-time detection of:
+    Uses YOLO models for real-time detection of:
     - PPE violations (missing helmets, vests, gloves, etc.)
     - Unsafe behaviors (running, climbing, phone use)
     - Hazard zones (restricted area access)
@@ -22,21 +35,204 @@ class CVDetector:
     
     def __init__(self):
         self.detection_confidence_threshold = 0.75
-        self.initialized = True
+        self.initialized = False
+        self.yolo_model = None
+        self.model_path = None
         
+        # Try to load YOLO model
+        self._load_yolo_model()
+        
+    def _load_yolo_model(self):
+        """Load YOLO model from the models directory"""
+        if not YOLO_AVAILABLE:
+            logger.warning("YOLO not available. Running in mock mode.")
+            return
+            
+        # Try to find model files
+        possible_paths = [
+            Path(__file__).parent.parent / "models" / "best.pt",  # /backend/app/models/best.pt
+            Path(__file__).parent.parent / "models" / "yolov8n.pt",  # /backend/app/models/yolov8n.pt
+            Path(__file__).parent.parent.parent.parent / "models" / "best.pt",
+            Path(__file__).parent.parent.parent.parent / "models" / "yolov8n.pt",
+            Path("models/best.pt"),
+            Path("models/yolov8n.pt"),
+        ]
+        
+        for model_path in possible_paths:
+            if model_path.exists():
+                try:
+                    logger.info(f"Loading YOLO model from {model_path}")
+                    self.yolo_model = YOLO(str(model_path))
+                    self.model_path = str(model_path)
+                    self.initialized = True
+                    logger.info(f"YOLO model loaded successfully: {model_path.name}")
+                    return
+                except Exception as e:
+                    logger.error(f"Failed to load model from {model_path}: {e}")
+                    
+        if not self.initialized:
+            logger.warning("No YOLO model found. Running in mock detection mode.")
+            logger.info(f"Searched paths: {[str(p) for p in possible_paths]}")
+    
+    def detect_from_image(self, image_path: str) -> List[Dict[str, Any]]:
+        """
+        Detect safety violations from an image file
+        
+        Args:
+            image_path: Path to the image file
+            
+        Returns:
+            List of detections with bounding boxes and confidence scores
+        """
+        if not self.initialized or self.yolo_model is None:
+            logger.warning("YOLO model not initialized, using mock detection")
+            return self._generate_mock_detections(1)
+        
+        try:
+            # Read image
+            img = cv2.imread(image_path)
+            if img is None:
+                logger.error(f"Failed to read image: {image_path}")
+                return []
+            
+            return self.detect_from_frame(img, camera_id=0)
+            
+        except Exception as e:
+            logger.error(f"Error detecting from image: {e}")
+            return []
+    
+    def detect_from_frame(self, frame: np.ndarray, camera_id: int = 0) -> List[Dict[str, Any]]:
+        """
+        Detect safety violations from a video frame
+        
+        Args:
+            frame: OpenCV image (numpy array)
+            camera_id: ID of the camera
+            
+        Returns:
+            List of detections
+        """
+        if not self.initialized or self.yolo_model is None:
+            return self._generate_mock_detections(camera_id)
+        
+        try:
+            # Run YOLO detection
+            results = self.yolo_model(frame, conf=self.detection_confidence_threshold)
+            
+            detections = []
+            for result in results:
+                for box in result.boxes:
+                    detection = self._process_yolo_detection(box, camera_id, result.names)
+                    if detection:
+                        detections.append(detection)
+            
+            return detections
+            
+        except Exception as e:
+            logger.error(f"Error in YOLO detection: {e}")
+            return self._generate_mock_detections(camera_id)
+    
+    def _process_yolo_detection(self, box, camera_id: int, class_names: dict) -> Optional[Dict[str, Any]]:
+        """Process a single YOLO detection box"""
+        try:
+            # Get box coordinates
+            x1, y1, x2, y2 = box.xyxy[0].cpu().numpy()
+            confidence = float(box.conf[0])
+            class_id = int(box.cls[0])
+            class_name = class_names[class_id]
+            
+            # Map YOLO classes to our detection types
+            detection_type, violation_type, severity, description = self._map_class_to_violation(class_name)
+            
+            return {
+                "camera_id": camera_id,
+                "detection_type": detection_type.value,
+                "violation_type": violation_type.value if violation_type else None,
+                "confidence": round(confidence, 2),
+                "severity": severity.value,
+                "description": description,
+                "class_name": class_name,
+                "bbox": {
+                    "x": int(x1),
+                    "y": int(y1),
+                    "w": int(x2 - x1),
+                    "h": int(y2 - y1),
+                },
+                "timestamp": datetime.utcnow(),
+                "model": Path(self.model_path).name if self.model_path else "unknown"
+            }
+        except Exception as e:
+            logger.error(f"Error processing detection: {e}")
+            return None
+    
+    def _map_class_to_violation(self, class_name: str):
+        """Map YOLO class names to violation types"""
+        class_name_lower = class_name.lower()
+        
+        # PPE Detection mappings
+        if 'no-hardhat' in class_name_lower or 'no_hardhat' in class_name_lower or 'no-helmet' in class_name_lower:
+            return (DetectionType.PPE_VIOLATION, ViolationType.NO_HELMET, 
+                    AlertSeverity.DANGER, f"Worker without hard hat detected")
+        
+        elif 'no-safety-vest' in class_name_lower or 'no_vest' in class_name_lower or 'no-vest' in class_name_lower:
+            return (DetectionType.PPE_VIOLATION, ViolationType.NO_VEST,
+                    AlertSeverity.WARNING, f"Worker without safety vest detected")
+        
+        elif 'no-gloves' in class_name_lower or 'no_gloves' in class_name_lower:
+            return (DetectionType.PPE_VIOLATION, ViolationType.NO_GLOVES,
+                    AlertSeverity.WARNING, f"Worker without gloves detected")
+        
+        elif 'no-mask' in class_name_lower or 'no_mask' in class_name_lower:
+            return (DetectionType.PPE_VIOLATION, ViolationType.NO_MASK,
+                    AlertSeverity.WARNING, f"Worker without face mask detected")
+        
+        elif 'hardhat' in class_name_lower or 'helmet' in class_name_lower:
+            return (DetectionType.PPE_VIOLATION, None,
+                    AlertSeverity.INFO, f"PPE compliant - {class_name}")
+        
+        elif 'vest' in class_name_lower or 'safety-vest' in class_name_lower:
+            return (DetectionType.PPE_VIOLATION, None,
+                    AlertSeverity.INFO, f"PPE compliant - {class_name}")
+        
+        # Person detection
+        elif 'person' in class_name_lower or 'worker' in class_name_lower:
+            return (DetectionType.UNSAFE_BEHAVIOR, None,
+                    AlertSeverity.INFO, f"Worker detected - {class_name}")
+        
+        # Fire/Smoke detection
+        elif 'fire' in class_name_lower or 'smoke' in class_name_lower:
+            return (DetectionType.FIRE_SMOKE, None,
+                    AlertSeverity.DANGER, f"Fire/Smoke detected")
+        
+        # Vehicle detection
+        elif 'forklift' in class_name_lower or 'vehicle' in class_name_lower or 'truck' in class_name_lower:
+            return (DetectionType.VEHICLE_COLLISION, None,
+                    AlertSeverity.WARNING, f"Vehicle detected - {class_name}")
+        
+        # Default
+        else:
+            return (DetectionType.UNSAFE_BEHAVIOR, None,
+                    AlertSeverity.INFO, f"Object detected - {class_name}")
+    
     def detect_violations(self, camera_id: int, frame: Optional[Any] = None) -> List[Dict[str, Any]]:
         """
         Analyze a camera frame and detect safety violations
-        In production, this would use OpenCV + ML models
         
         Args:
             camera_id: ID of the camera
-            frame: Video frame to analyze (numpy array in production)
+            frame: Video frame to analyze (numpy array)
             
         Returns:
             List of detected violations with bounding boxes and confidence scores
         """
-        # Simulate random detections for demo purposes
+        if frame is not None and isinstance(frame, np.ndarray):
+            return self.detect_from_frame(frame, camera_id)
+        else:
+            # If no frame provided, use mock detection
+            return self._generate_mock_detections(camera_id)
+    
+    def _generate_mock_detections(self, camera_id: int) -> List[Dict[str, Any]]:
+        """Generate mock detections when YOLO is not available"""
         detections = []
         
         # Simulate 20% chance of detection per frame

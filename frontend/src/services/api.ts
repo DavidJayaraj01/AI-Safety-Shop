@@ -2,6 +2,7 @@ import axios from 'axios';
 import type { AxiosInstance } from 'axios';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+const ARDUINO_ENDPOINT = 'http://10.115.11.112/';
 
 const api: AxiosInstance = axios.create({
   baseURL: API_BASE_URL,
@@ -10,7 +11,40 @@ const api: AxiosInstance = axios.create({
   },
 });
 
-// Sensors API
+// Arduino API instance
+const arduinoApi: AxiosInstance = axios.create({
+  baseURL: ARDUINO_ENDPOINT,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  timeout: 5000, // 5 second timeout for Arduino requests
+});
+
+// Arduino Sensors API (Real-time IoT data)
+export const arduinoSensorsApi = {
+  // Fetch live sensor data from Arduino (direct connection)
+  getLiveSensorData: async () => {
+    try {
+      const response = await arduinoApi.get('/');
+      return { data: response.data, status: 'connected' };
+    } catch (error) {
+      console.error('Arduino direct connection error:', error);
+      // Fallback to backend proxy
+      try {
+        const proxyResponse = await api.get('/api/arduino/sensors');
+        return { data: proxyResponse.data.data, status: 'connected' };
+      } catch (proxyError) {
+        console.error('Arduino proxy connection error:', proxyError);
+        return { data: null, status: 'disconnected', error: proxyError };
+      }
+    }
+  },
+  
+  // Check Arduino status through backend
+  getArduinoStatus: () => api.get('/api/arduino/status'),
+};
+
+// Sensors API (Backend)
 export const sensorsApi = {
   getAllSensors: () => api.get('/sensors'),
   getSensorData: (sensorType: string) => api.get(`/sensors/${sensorType}`),
@@ -105,6 +139,22 @@ export const cvApi = {
   analyzePPE: () => api.post('/cv/analyze/ppe'),
   analyzeHazardZones: () => api.post('/cv/analyze/hazard-zones'),
   analyzeUnsafeBehavior: () => api.post('/cv/analyze/unsafe-behavior'),
+  
+  // YOLO Image Detection
+  uploadImageForDetection: (imageFile: File) => {
+    const formData = new FormData();
+    formData.append('file', imageFile);
+    return api.post('/cv/detect/upload', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+  },
+  
+  // Live Camera Streaming
+  getLiveStreamUrl: (cameraId: number = 0) => 
+    `${API_BASE_URL}/cv/stream/live?camera_id=${cameraId}`,
+  getStreamStatus: () => api.get('/cv/stream/status'),
 };
 
 // WebSocket connection for real-time data

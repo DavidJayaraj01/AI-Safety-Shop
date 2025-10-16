@@ -25,12 +25,34 @@ const CVMonitoring: React.FC = () => {
   const [selectedCamera, setSelectedCamera] = useState<number | null>(null);
   const [filterSeverity, setFilterSeverity] = useState<string>('all');
   const [filterAcknowledged, setFilterAcknowledged] = useState<boolean>(false);
+  
+  // YOLO Detection State
+  const [detectorStatus, setDetectorStatus] = useState<any>(null);
+  
+  // Live Camera State
+  const [showLiveCamera, setShowLiveCamera] = useState(false);
+  const [streamStatus, setStreamStatus] = useState<any>(null);
+  const liveStreamUrl = cvApi.getLiveStreamUrl(0);
 
   useEffect(() => {
     loadData();
+    loadDetectorStatus();
     const interval = setInterval(loadData, 5000); // Refresh every 5 seconds
     return () => clearInterval(interval);
   }, [selectedCamera, filterSeverity, filterAcknowledged]);
+
+  const loadDetectorStatus = async () => {
+    try {
+      const res = await cvApi.getDetectorStatus();
+      setDetectorStatus(res.data);
+      
+      // Also check stream status
+      const streamRes = await cvApi.getStreamStatus();
+      setStreamStatus(streamRes.data);
+    } catch (error) {
+      console.error('Error loading detector status:', error);
+    }
+  };
 
   const loadData = async () => {
     try {
@@ -227,6 +249,127 @@ const CVMonitoring: React.FC = () => {
           </div>
         </div>
       )}
+
+      {/* Live Camera Feed Section */}
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+        <div className="mb-4">
+          <div className="flex items-center justify-between mb-3">
+            <div>
+              <h2 className="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
+                <CameraIcon className="h-6 w-6 text-primary" />
+                Live Camera YOLO Detection
+              </h2>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                Real-time safety violation detection from your webcam with AI-powered YOLO model
+              </p>
+            </div>
+          </div>
+          
+          <div className="flex items-center justify-between gap-3 flex-wrap">
+            <div className="flex items-center gap-3">
+              {detectorStatus && (
+                <div className={`px-3 py-1 rounded-full text-sm font-semibold ${
+                  detectorStatus.yolo_model_loaded 
+                    ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400'
+                    : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400'
+                }`}>
+                  {detectorStatus.yolo_model_loaded ? '🟢 YOLO Ready' : '🟡 Mock Mode'}
+                </div>
+              )}
+              {streamStatus && (
+                <div className={`px-3 py-1 rounded-full text-sm font-semibold ${
+                  streamStatus.camera_available
+                    ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400'
+                    : 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400'
+                }`}>
+                  {streamStatus.camera_available ? '🟢 Camera Ready' : '🔴 No Camera'}
+                </div>
+              )}
+              {!streamStatus && (
+                <div className="px-3 py-1 rounded-full text-sm font-semibold bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-400">
+                  ⏳ Checking Camera...
+                </div>
+              )}
+            </div>
+            
+            <button
+              onClick={() => setShowLiveCamera(!showLiveCamera)}
+              disabled={!streamStatus?.camera_available && streamStatus !== null}
+              className={`px-8 py-3 rounded-lg font-bold text-lg transition-colors shadow-lg ${
+                showLiveCamera
+                  ? 'bg-red-600 text-white hover:bg-red-700'
+                  : 'bg-blue-600 text-white hover:bg-blue-700'
+              } disabled:opacity-50 disabled:cursor-not-allowed`}
+            >
+              {showLiveCamera ? '⏹ Stop Camera' : '▶ Start Camera'}
+            </button>
+          </div>
+        </div>
+
+        {showLiveCamera && streamStatus?.camera_available ? (
+          <div className="relative">
+            <div className="rounded-lg overflow-hidden border-4 border-primary bg-black">
+              <img
+                src={liveStreamUrl}
+                alt="Live Camera Feed with YOLO Detection"
+                className="w-full h-auto"
+                style={{ maxHeight: '720px', objectFit: 'contain' }}
+                onError={(e) => {
+                  console.error('Stream error:', e);
+                  toast.error('Failed to load camera stream');
+                }}
+              />
+            </div>
+            <div className="absolute top-4 left-4 bg-red-600 text-white px-4 py-2 rounded-full text-sm font-bold flex items-center gap-2 shadow-lg">
+              <span className="w-3 h-3 bg-white rounded-full animate-pulse"></span>
+              🔴 LIVE DETECTION
+            </div>
+            {detectorStatus?.yolo_model_loaded && (
+              <div className="absolute top-4 right-4 bg-green-600 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">
+                YOLO Active
+              </div>
+            )}
+          </div>
+        ) : !showLiveCamera ? (
+          <div className="text-center py-16 text-gray-500 dark:text-gray-400 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-900">
+            <CameraIcon className="h-20 w-20 mx-auto mb-4 opacity-50" />
+            <p className="text-xl font-semibold mb-2">Click "Start Camera" to begin live detection</p>
+            <p className="text-sm mt-2">
+              {streamStatus?.message || 'Real-time YOLO detection with bounding boxes will appear here'}
+            </p>
+            <div className="mt-4 flex items-center justify-center gap-4 text-sm">
+              <div className="flex items-center gap-2">
+                <CheckCircle className="h-5 w-5 text-green-500" />
+                <span>PPE Detection</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle className="h-5 w-5 text-green-500" />
+                <span>Hazard Zones</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle className="h-5 w-5 text-green-500" />
+                <span>Safety Violations</span>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="text-center py-16 text-gray-500 dark:text-gray-400 border-2 border-dashed border-red-300 dark:border-red-600 rounded-lg bg-red-50 dark:bg-red-900/10">
+            <AlertTriangle className="h-20 w-20 mx-auto mb-4 text-red-500" />
+            <p className="text-xl font-semibold mb-2">No Camera Detected</p>
+            <p className="text-sm mt-2">
+              Please connect a webcam and allow camera permissions to use live detection
+            </p>
+          </div>
+        )}
+
+        {detectorStatus && !detectorStatus.yolo_model_loaded && (
+          <div className="mt-4 p-3 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg">
+            <p className="text-sm text-yellow-800 dark:text-yellow-400">
+              ⚠️ YOLO model not loaded. Live detection will run in mock mode. Model path: {detectorStatus.model_path || 'Not found'}
+            </p>
+          </div>
+        )}
+      </div>
 
       {/* Camera Grid */}
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
