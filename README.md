@@ -2,7 +2,26 @@
 
 A comprehensive full-stack IoT safety monitoring system that uses AI to detect hazards, predict incidents, and ensure workplace safety in industrial environments.
 
-## 🌟 Features
+## � Latest Updates (October 16, 2025)
+
+### ✅ Camera Feeds & Recent Violations - WORKING
+- **Database Seeding System**: 6 cameras and 30+ sample detections automatically added
+- **Real-Time Data Display**: Camera grid and violations list show actual database data
+- **Live YOLOv8 Detection**: Working webcam integration with real-time object detection
+- **Complete Statistics**: All metrics powered by real database queries
+
+### ✅ Real-Time Reports & Analytics - WORKING
+- **Dynamic Data**: No more mock data - everything pulls from the database in real-time
+- **Multiple Time Periods**: Filter by Today, Week, Month, Quarter, or Year
+- **Interactive Charts**: Incident trends and severity distribution with actual data
+- **Auto-Refresh**: Data updates every 30 seconds automatically
+- **Comprehensive Analytics**: Response times, critical violations, detection type breakdown
+
+**📄 See detailed documentation:**
+- [CAMERA_FEEDS_SETUP.md](./CAMERA_FEEDS_SETUP.md) - Complete camera feeds guide
+- [REPORTS_REALTIME_SETUP.md](./REPORTS_REALTIME_SETUP.md) - Complete reports guide
+
+## �🌟 Features
 
 ### 🎯 Dual Operating Modes
 - **Heavy Industry Mode**: Gas leaks, vibration monitoring, temperature alerts, auto-shutdown

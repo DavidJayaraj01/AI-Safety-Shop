@@ -52,6 +52,17 @@ async def lifespan(app: FastAPI):
     logger.info("Starting AI Safety Monitoring System...")
     await init_db()
     logger.info("Database initialized successfully")
+    
+    # Seed sample data for Reports and CV Monitoring
+    from app.db.seed_data import seed_all_data
+    from app.db.database import AsyncSessionLocal
+    async with AsyncSessionLocal() as session:
+        try:
+            await seed_all_data(session)
+            logger.info("Database seeded successfully")
+        except Exception as e:
+            logger.error(f"Error seeding data: {e}")
+    
     yield
     # Shutdown
     logger.info("Shutting down AI Safety Monitoring System...")

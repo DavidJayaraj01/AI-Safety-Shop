@@ -2,7 +2,6 @@ import axios from 'axios';
 import type { AxiosInstance } from 'axios';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
-const ARDUINO_ENDPOINT = 'http://10.115.11.112/';
 
 const api: AxiosInstance = axios.create({
   baseURL: API_BASE_URL,
@@ -11,37 +10,29 @@ const api: AxiosInstance = axios.create({
   },
 });
 
-// Arduino API instance
-const arduinoApi: AxiosInstance = axios.create({
-  baseURL: ARDUINO_ENDPOINT,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  timeout: 5000, // 5 second timeout for Arduino requests
-});
-
 // Arduino Sensors API (Real-time IoT data)
 export const arduinoSensorsApi = {
-  // Fetch live sensor data from Arduino (direct connection)
+  // Fetch live sensor data from Arduino via backend proxy (avoids CORS)
   getLiveSensorData: async () => {
     try {
-      const response = await arduinoApi.get('/');
-      return { data: response.data, status: 'connected' };
+      // Always use backend proxy to avoid CORS issues
+      const proxyResponse = await api.get('/sensors/live/arduino');
+      return { 
+        data: proxyResponse.data.sensors, 
+        status: proxyResponse.data.status,
+        alerts: proxyResponse.data.alerts_triggered || []
+      };
     } catch (error) {
-      console.error('Arduino direct connection error:', error);
-      // Fallback to backend proxy
-      try {
-        const proxyResponse = await api.get('/api/arduino/sensors');
-        return { data: proxyResponse.data.data, status: 'connected' };
-      } catch (proxyError) {
-        console.error('Arduino proxy connection error:', proxyError);
-        return { data: null, status: 'disconnected', error: proxyError };
-      }
+      console.error('Arduino backend proxy error:', error);
+      return { data: null, status: 'disconnected', error: error, alerts: [] };
     }
   },
   
   // Check Arduino status through backend
   getArduinoStatus: () => api.get('/api/arduino/status'),
+  
+  // Get parsed Arduino sensor data
+  getArduinoSensors: () => api.get('/api/arduino/sensors'),
 };
 
 // Sensors API (Backend)
@@ -54,6 +45,7 @@ export const sensorsApi = {
       : api.get(`/sensors/history?hours=${hours}`),
   getRFIDLogs: (days: number = 7) => api.get(`/sensors/rfid/logs?days=${days}`),
   getStatistics: () => api.get('/sensors/statistics'),
+  getLiveArduinoData: () => api.get('/sensors/live/arduino'),
 };
 
 // Alerts API

@@ -71,7 +71,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     fetchArduinoData();
-    const interval = setInterval(fetchArduinoData, 2000); // Update every 2 seconds for real-time data
+    const interval = setInterval(fetchArduinoData, 15000); // Update every 15 seconds for real-time data
     return () => clearInterval(interval);
   }, []);
 
@@ -83,27 +83,36 @@ const Dashboard = () => {
         setIsConnected(true);
         
         // Parse Arduino sensor data
-        // Expected format from Arduino: { temperature: 25.5, humidity: 60, smoke: 150, distance: 30, rfid: "ABC123" }
+        // Backend sends: { gas: {...}, temperature: {...}, humidity: {...}, ultrasonic: {...}, rfid: {...} }
         const arduinoData = response.data;
         
         // Transform Arduino data to match our sensor format
         const transformedSensors = Object.entries(sensorConfig).map(([key, config]) => {
           let value;
+          let status = 'normal';
           
           if (key === 'temperature') {
-            value = parseFloat(arduinoData.temperature || 0);
+            value = parseFloat(arduinoData.temperature?.value || 0);
+            status = arduinoData.temperature?.status || 'normal';
           } else if (key === 'humidity') {
-            value = parseFloat(arduinoData.humidity || 0);
+            value = parseFloat(arduinoData.humidity?.value || 0);
+            status = arduinoData.humidity?.status || 'normal';
           } else if (key === 'smoke') {
-            value = parseInt(arduinoData.smoke || 0);
+            // Map 'gas' sensor to 'smoke' display
+            value = parseInt(arduinoData.gas?.value || 0);
+            status = arduinoData.gas?.status || 'normal';
           } else if (key === 'distance') {
-            value = parseFloat(arduinoData.distance || 0);
+            // Map 'ultrasonic' sensor to 'distance' display
+            value = parseFloat(arduinoData.ultrasonic?.value || 0);
+            status = arduinoData.ultrasonic?.status || 'normal';
           } else if (key === 'rfid') {
-            value = arduinoData.rfid || 'None';
+            // RFID tag value
+            value = arduinoData.rfid?.value || 'No Tag Detected';
+            status = arduinoData.rfid?.status || 'idle';
             setRfidTag(value);
+          } else {
+            value = 0;
           }
-          
-          const status = determineStatus(value, config.threshold);
           
           return {
             id: key,
@@ -165,7 +174,15 @@ const Dashboard = () => {
       const maxDataPoints = 20;
       
       // Update history for each sensor
-      ['temperature', 'humidity', 'smoke', 'distance'].forEach(key => {
+      // Map backend sensor names to frontend display names
+      const sensorMap = {
+        temperature: data.temperature?.value,
+        humidity: data.humidity?.value,
+        smoke: data.gas?.value,  // gas -> smoke
+        distance: data.ultrasonic?.value  // ultrasonic -> distance
+      };
+      
+      Object.entries(sensorMap).forEach(([key, value]) => {
         if (!newHistory[key]) {
           newHistory[key] = [];
         }
@@ -174,7 +191,7 @@ const Dashboard = () => {
           ...newHistory[key].slice(-maxDataPoints + 1),
           {
             timestamp,
-            value: parseFloat(data[key] || 0)
+            value: parseFloat(value || 0)
           }
         ];
       });

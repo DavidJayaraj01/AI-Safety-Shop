@@ -4,7 +4,6 @@ import {
   Download,
   Calendar,
   Filter,
-  TrendingUp,
   AlertTriangle,
   CheckCircle,
   XCircle,
@@ -30,68 +29,66 @@ const Reports = () => {
   const [selectedType, setSelectedType] = useState('all');
   const [isLoading, setIsLoading] = useState(true);
 
+  const [stats, setStats] = useState<any>(null);
+  const [chartData, setChartData] = useState<any>(null);
+
   useEffect(() => {
     fetchReports();
+    fetchAnalytics();
+    
+    // Refresh data every 30 seconds
+    const interval = setInterval(() => {
+      fetchReports();
+      fetchAnalytics();
+    }, 30000);
+    
+    return () => clearInterval(interval);
   }, [selectedPeriod, selectedType]);
 
   const fetchReports = async () => {
     try {
-      // Simulate API call
-      setTimeout(() => {
-        const mockReports: Report[] = [
-          {
-            id: 1,
-            type: 'safety',
-            title: 'Weekly Safety Report',
-            date: '2024-10-15',
-            status: 'completed',
-            incidents: 3,
-            severity: 'medium'
-          },
-          {
-            id: 2,
-            type: 'sensor',
-            title: 'Sensor Performance Analysis',
-            date: '2024-10-14',
-            status: 'completed',
-            incidents: 0,
-            severity: 'low'
-          },
-          {
-            id: 3,
-            type: 'alert',
-            title: 'Alert Summary Report',
-            date: '2024-10-13',
-            status: 'completed',
-            incidents: 7,
-            severity: 'high'
-          },
-          {
-            id: 4,
-            type: 'compliance',
-            title: 'Compliance Report',
-            date: '2024-10-12',
-            status: 'pending',
-            incidents: 2,
-            severity: 'medium'
-          },
-          {
-            id: 5,
-            type: 'maintenance',
-            title: 'Maintenance Log',
-            date: '2024-10-11',
-            status: 'completed',
-            incidents: 1,
-            severity: 'low'
-          }
-        ];
-        setReports(mockReports);
-        setIsLoading(false);
-      }, 500);
+      setIsLoading(true);
+      
+      // Fetch reports list
+      const response = await fetch(
+        `http://localhost:8000/reports/list?period=${selectedPeriod}&report_type=${selectedType}`
+      );
+      
+      if (!response.ok) throw new Error('Failed to fetch reports');
+      
+      const data = await response.json();
+      setReports(data);
+      
+      // Fetch summary stats
+      const statsResponse = await fetch(
+        `http://localhost:8000/reports/?period=${selectedPeriod}`
+      );
+      
+      if (statsResponse.ok) {
+        const statsData = await statsResponse.json();
+        setStats(statsData.summary);
+      }
+      
+      setIsLoading(false);
     } catch (error) {
       console.error('Error fetching reports:', error);
       toast.error('Failed to load reports');
       setIsLoading(false);
+    }
+  };
+
+  const fetchAnalytics = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:8000/reports/analytics?period=${selectedPeriod}`
+      );
+      
+      if (response.ok) {
+        const data = await response.json();
+        setChartData(data);
+      }
+    } catch (error) {
+      console.error('Error fetching analytics:', error);
     }
   };
 
@@ -137,23 +134,20 @@ const Reports = () => {
     selectedType === 'all' || report.type === selectedType
   );
 
-  // Mock data for charts
-  const incidentTrendData = [
-    { timestamp: 'Mon', value: 3 },
-    { timestamp: 'Tue', value: 5 },
-    { timestamp: 'Wed', value: 2 },
-    { timestamp: 'Thu', value: 7 },
-    { timestamp: 'Fri', value: 4 },
-    { timestamp: 'Sat', value: 1 },
-    { timestamp: 'Sun', value: 3 }
-  ];
+  // Prepare chart data from API response
+  const incidentTrendData = chartData?.incidentTrend 
+    ? chartData.incidentTrend.labels.map((label: string, index: number) => ({
+        timestamp: label,
+        value: chartData.incidentTrend.data[index]
+      }))
+    : [];
 
-  const severityDistribution = [
-    { timestamp: 'Low', value: 45 },
-    { timestamp: 'Medium', value: 30 },
-    { timestamp: 'High', value: 20 },
-    { timestamp: 'Critical', value: 5 }
-  ];
+  const severityDistribution = chartData?.severityDistribution
+    ? chartData.severityDistribution.labels.map((label: string, index: number) => ({
+        timestamp: label,
+        value: chartData.severityDistribution.data[index]
+      }))
+    : [];
 
   if (isLoading) {
     return (
@@ -255,7 +249,7 @@ const Reports = () => {
             <div>
               <p className="text-sm opacity-90">Total Incidents</p>
               <p className="text-3xl font-bold">
-                {reports.reduce((sum, r) => sum + r.incidents, 0)}
+                {stats?.totalIncidents || reports.reduce((sum, r) => sum + r.incidents, 0)}
               </p>
             </div>
             <AlertTriangle className="h-10 w-10 opacity-80" />
@@ -265,30 +259,92 @@ const Reports = () => {
         <div className="card bg-gradient-to-br from-purple-500 to-purple-700 text-white">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm opacity-90">Avg Severity</p>
-              <p className="text-3xl font-bold">Medium</p>
+              <p className="text-sm opacity-90">Avg Response Time</p>
+              <p className="text-3xl font-bold">
+                {stats?.averageResponseTime ? `${stats.averageResponseTime}h` : 'N/A'}
+              </p>
             </div>
-            <TrendingUp className="h-10 w-10 opacity-80" />
+            <Clock className="h-10 w-10 opacity-80" />
           </div>
         </div>
       </div>
 
+      {/* Additional Statistics */}
+      {stats && (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="card border-l-4 border-red-500">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Critical Violations</p>
+                <p className="text-2xl font-bold text-gray-900 dark:text-white">
+                  {stats.criticalViolations || 0}
+                </p>
+              </div>
+              <AlertTriangle className="h-8 w-8 text-red-600" />
+            </div>
+          </div>
+
+          <div className="card border-l-4 border-green-500">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Resolved Alerts</p>
+                <p className="text-2xl font-bold text-gray-900 dark:text-white">
+                  {stats.resolvedAlerts || 0}
+                </p>
+              </div>
+              <CheckCircle className="h-8 w-8 text-green-600" />
+            </div>
+          </div>
+
+          <div className="card border-l-4 border-blue-500">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Data Points</p>
+                <p className="text-2xl font-bold text-gray-900 dark:text-white">
+                  {stats.totalDataPoints?.toLocaleString() || 0}
+                </p>
+              </div>
+              <BarChart3 className="h-8 w-8 text-blue-600" />
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Charts */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <Chart
-          title="Incident Trend"
-          data={incidentTrendData}
-          dataKey="value"
-          type="line"
-          color="#3b82f6"
-        />
-        <Chart
-          title="Severity Distribution"
-          data={severityDistribution}
-          dataKey="value"
-          type="bar"
-          color="#8b5cf6"
-        />
+        {incidentTrendData.length > 0 ? (
+          <Chart
+            title="Incident Trend"
+            data={incidentTrendData}
+            dataKey="value"
+            type="line"
+            color="#3b82f6"
+          />
+        ) : (
+          <div className="card">
+            <h3 className="text-lg font-semibold mb-4">Incident Trend</h3>
+            <div className="flex items-center justify-center h-64 text-gray-500">
+              <p>No data available for selected period</p>
+            </div>
+          </div>
+        )}
+
+        {severityDistribution.length > 0 ? (
+          <Chart
+            title="Severity Distribution"
+            data={severityDistribution}
+            dataKey="value"
+            type="bar"
+            color="#8b5cf6"
+          />
+        ) : (
+          <div className="card">
+            <h3 className="text-lg font-semibold mb-4">Severity Distribution</h3>
+            <div className="flex items-center justify-center h-64 text-gray-500">
+              <p>No data available for selected period</p>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Reports List */}

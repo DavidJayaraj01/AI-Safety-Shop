@@ -14,6 +14,25 @@ try:
     from ultralytics import YOLO
     import cv2
     import torch
+    
+    # Monkey-patch ultralytics to use weights_only=False for PyTorch 2.6+
+    # This allows loading of custom trained YOLO models from trusted sources
+    # PyTorch 2.6+ changed default to weights_only=True for security
+    try:
+        import ultralytics.nn.tasks as tasks_module
+        original_torch_load = torch.load
+        
+        def patched_torch_load(f, *args, **kwargs):
+            """Load torch files with weights_only=False to support YOLO models"""
+            kwargs['weights_only'] = False
+            return original_torch_load(f, *args, **kwargs)
+        
+        # Apply the patch
+        torch.load = patched_torch_load
+        logging.info("Patched torch.load to use weights_only=False for YOLO model loading")
+    except Exception as e:
+        logging.warning(f"Could not patch torch.load: {e}")
+    
     YOLO_AVAILABLE = True
 except ImportError:
     YOLO_AVAILABLE = False
@@ -49,29 +68,25 @@ class CVDetector:
             logger.warning("YOLO not available. Running in mock mode.")
             return
             
-        # Try to find model files (prioritize custom PPE detection models)
+        # ONLY use models from the app/models folder - NO DOWNLOADS
+        models_dir = Path(__file__).parent.parent / "models"
         possible_paths = [
-            Path(__file__).parent.parent / "models" / "ppe-detection.pt",  # Custom PPE model
-            Path(__file__).parent.parent / "models" / "best.pt",  # Trained custom model
-            Path(__file__).parent.parent / "models" / "yolov8n.pt",  # Standard YOLOv8 nano
-            Path(__file__).parent.parent / "models" / "yolov8s.pt",  # Standard YOLOv8 small
-            Path(__file__).parent.parent / "models" / "yolov8m.pt",  # Standard YOLOv8 medium
-            Path(__file__).parent.parent.parent.parent / "AI-smart-shop" / "ppe-detection.pt",
-            Path(__file__).parent.parent.parent.parent / "AI-smart-shop" / "yolov8n.pt",
-            Path("models/ppe-detection.pt"),
-            Path("models/best.pt"),
-            Path("models/yolov8n.pt"),
-            Path("ppe-detection.pt"),  # Root directory
-            Path("yolov8n.pt"),
+            models_dir / "best.pt",           # Priority 1: Custom trained PPE detection model
+            models_dir / "ppe-detection.pt",  # Priority 2: Alternative PPE model
+            models_dir / "yolov8n.pt",        # Priority 3: Standard YOLOv8 nano
+            models_dir / "yolov8s.pt",        # Priority 4: Standard YOLOv8 small
+            models_dir / "yolov8m.pt",        # Priority 5: Standard YOLOv8 medium
         ]
+        
+        logger.info(f"Looking for YOLO models in: {models_dir}")
+        logger.info(f"Models directory exists: {models_dir.exists()}")
         
         for model_path in possible_paths:
             if model_path.exists():
                 try:
                     logger.info(f"Loading YOLO model from {model_path}")
-                    # Add safe globals for ultralytics models to fix PyTorch 2.6 security change
-                    torch.serialization.add_safe_globals(['ultralytics.nn.tasks.DetectionModel'])
-                    self.yolo_model = YOLO(str(model_path))
+                    # Load with weights_only=False to avoid strict pickling restrictions
+                    self.yolo_model = YOLO(str(model_path), task='detect')
                     self.model_path = str(model_path)
                     self.initialized = True
                     
@@ -83,21 +98,20 @@ class CVDetector:
                     return
                 except Exception as e:
                     logger.error(f"Failed to load model from {model_path}: {e}")
+                    import traceback
+                    logger.error(f"Full traceback: {traceback.format_exc()}")
                     
-        # If no local model found, try to download YOLOv8n as fallback
-        try:
-            logger.info("No local model found. Downloading YOLOv8n...")
-            self.yolo_model = YOLO('yolov8n.pt')  # This will download automatically
-            self.model_path = 'yolov8n.pt'
-            self.initialized = True
-            logger.info("YOLOv8n downloaded and loaded successfully")
-            return
-        except Exception as e:
-            logger.error(f"Failed to download YOLOv8n: {e}")
-                    
+        # DO NOT DOWNLOAD - Only use models from the models folder
         if not self.initialized:
-            logger.warning("No YOLO model found. Running in mock detection mode.")
-            logger.info(f"Searched paths: {[str(p) for p in possible_paths]}")
+            logger.error("=" * 80)
+            logger.error("CRITICAL: No YOLO model found in models folder!")
+            logger.error("Please ensure best.pt or yolov8n.pt exists in:")
+            logger.error(f"  - {Path(__file__).parent.parent / 'models'}")
+            logger.error("Searched paths:")
+            for p in possible_paths:
+                logger.error(f"  - {p} (exists: {p.exists()})")
+            logger.error("=" * 80)
+            logger.warning("Running in mock detection mode - NO REAL DETECTION!")
     
     def detect_from_image(self, image_path: str) -> List[Dict[str, Any]]:
         """
