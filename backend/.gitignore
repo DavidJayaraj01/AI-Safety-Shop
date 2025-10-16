@@ -1,0 +1,11 @@
+.env
+*.pyc
+__pycache__/
+*.log
+*.db
+*.sqlite
+venv/
+.vscode/
+.idea/
+models/*.pt
+!models/.gitkeep

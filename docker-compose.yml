@@ -1,0 +1,85 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15
+    container_name: safety_monitor_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: safety_monitor
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - safety_network
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: safety_monitor_redis
+    ports:
+      - "6379:6379"
+    networks:
+      - safety_network
+
+  # Mosquitto MQTT Broker
+  mosquitto:
+    image: eclipse-mosquitto:2
+    container_name: safety_monitor_mqtt
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - ./mosquitto/config:/mosquitto/config
+      - ./mosquitto/data:/mosquitto/data
+      - ./mosquitto/log:/mosquitto/log
+    networks:
+      - safety_network
+
+  # FastAPI Backend
+  backend:
+    build: ./backend
+    container_name: safety_monitor_backend
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+    volumes:
+      - ./backend:/app
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://postgres:password@postgres:5432/safety_monitor
+      - REDIS_URL=redis://redis:6379/0
+      - MQTT_BROKER=mosquitto
+    depends_on:
+      - postgres
+      - redis
+      - mosquitto
+    networks:
+      - safety_network
+
+  # React Frontend
+  frontend:
+    build: ./frontend
+    container_name: safety_monitor_frontend
+    command: npm run dev -- --host 0.0.0.0
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - "3000:5173"
+    environment:
+      - VITE_API_URL=http://localhost:8000/api
+      - VITE_WS_URL=ws://localhost:8000/ws
+    depends_on:
+      - backend
+    networks:
+      - safety_network
+
+networks:
+  safety_network:
+    driver: bridge
+
+volumes:
+  postgres_data:
