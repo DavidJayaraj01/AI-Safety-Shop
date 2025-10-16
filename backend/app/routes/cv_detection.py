@@ -354,31 +354,57 @@ async def analyze_unsafe_behavior():
 def generate_camera_frames(camera_id: int = 0):
     """
     Generator function to capture frames from camera and run YOLO detection
+    Optimized for real-time performance with YOLOv8
     """
-    logger.info(f"Starting camera stream for camera_id={camera_id}")
-    cap = cv2.VideoCapture(camera_id)
+    logger.info(f"Starting YOLOv8 camera stream for camera_id={camera_id}")
     
-    if not cap.isOpened():
-        logger.error(f"Failed to open camera {camera_id}")
+    # Try different camera sources
+    cap = None
+    camera_sources = [camera_id, f"/dev/video{camera_id}", 0]  # Try device ID, then video device, then default
+    
+    for source in camera_sources:
+        try:
+            cap = cv2.VideoCapture(source)
+            if cap.isOpened():
+                logger.info(f"Successfully opened camera source: {source}")
+                break
+            else:
+                cap.release()
+        except Exception as e:
+            logger.warning(f"Failed to open camera source {source}: {e}")
+    
+    if cap is None or not cap.isOpened():
+        logger.error(f"Failed to open any camera source for camera_id={camera_id}")
         # Yield an error frame
         error_frame = np.zeros((480, 640, 3), dtype=np.uint8)
-        cv2.putText(error_frame, "Camera Error: Failed to open camera", (50, 240),
+        cv2.putText(error_frame, "Camera Error: No camera available", (50, 240),
                    cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
+        cv2.putText(error_frame, f"Tried sources: {camera_sources}", (50, 280),
+                   cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 1)
         ret, buffer = cv2.imencode('.jpg', error_frame)
         if ret:
             yield (b'--frame\r\n'
                    b'Content-Type: image/jpeg\r\n\r\n' + buffer.tobytes() + b'\r\n')
         return
     
-    # Set camera properties for better performance
+    # Optimize camera settings for real-time performance
     cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
     cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
     cap.set(cv2.CAP_PROP_FPS, 30)
     cap.set(cv2.CAP_PROP_BUFFERSIZE, 1)  # Minimize buffer to reduce latency
     
-    logger.info(f"Camera {camera_id} opened successfully")
+    # Get actual camera properties
+    actual_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+    actual_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+    actual_fps = cap.get(cv2.CAP_PROP_FPS)
+    
+    logger.info(f"Camera {camera_id} properties: {actual_width}x{actual_height} @ {actual_fps} FPS")
+    
     frame_count = 0
     last_detections = []
+    detection_count = 0
+    detection_fps = 0
+    last_detection_time = time.time()
     
     try:
         while True:
@@ -389,15 +415,27 @@ def generate_camera_frames(camera_id: int = 0):
                 continue
             
             frame_count += 1
+            current_time = time.time()
             
-            # Run YOLO detection every 3rd frame for performance (still 10 FPS detection)
+            # Run YOLO detection every 3rd frame for performance (still ~10 FPS detection)
             if frame_count % 3 == 0:
-                last_detections = cv_detector.detect_from_frame(frame)
+                detection_start = time.time()
+                last_detections = cv_detector.detect_from_frame(frame, camera_id)
+                detection_time = time.time() - detection_start
+                
+                detection_count += 1
+                if current_time - last_detection_time >= 1.0:  # Update FPS every second
+                    detection_fps = detection_count / (current_time - last_detection_time)
+                    detection_count = 0
+                    last_detection_time = current_time
             
-            # Draw bounding boxes from last detection
+            # Draw enhanced bounding boxes and labels
+            annotated_frame = frame.copy()
+            
             for det in last_detections:
                 bbox = det.get('bbox', {})
-                # Handle both dict and list formats
+                
+                # Handle both dict and list bbox formats
                 if isinstance(bbox, dict):
                     x1 = int(bbox.get('x', 0))
                     y1 = int(bbox.get('y', 0))
@@ -409,74 +447,104 @@ def generate_camera_frames(camera_id: int = 0):
                     x1, y1, x2, y2 = [int(coord) for coord in bbox]
                 else:
                     continue
-                    
-                    # Color based on severity (BGR format for OpenCV)
-                    color = (255, 0, 0)  # Blue default
-                    severity = det.get('severity', '').lower() if isinstance(det.get('severity'), str) else str(det.get('severity', '')).lower()
-                    if severity == 'danger' or 'danger' in severity:
-                        color = (0, 0, 255)  # Red
-                    elif severity == 'warning' or 'warning' in severity:
-                        color = (0, 165, 255)  # Orange
-                    elif severity == 'info' or 'info' in severity:
-                        color = (0, 255, 0)  # Green
-                    
-                    # Draw rectangle with thicker line
-                    cv2.rectangle(frame, (x1, y1), (x2, y2), color, 3)
-                    
-                    # Draw label with better visibility
-                    class_label = det.get('class_name', det.get('class', det.get('detection_type', 'Unknown')))
-                    confidence = det.get('confidence', 0)
-                    label = f"{class_label} {int(confidence * 100)}%"
-                    
-                    # Calculate text size for background
-                    font = cv2.FONT_HERSHEY_SIMPLEX
-                    font_scale = 0.6
-                    thickness = 2
-                    (text_w, text_h), baseline = cv2.getTextSize(label, font, font_scale, thickness)
-                    
-                    # Draw filled rectangle as background
-                    cv2.rectangle(frame, (x1, y1 - text_h - baseline - 5), 
-                                (x1 + text_w + 5, y1), color, -1)
-                    
-                    # Draw text
-                    cv2.putText(frame, label, (x1 + 2, y1 - baseline - 2), 
-                              font, font_scale, (255, 255, 255), thickness)
+                
+                # Enhanced color coding based on severity
+                severity = det.get('severity', '').lower() if isinstance(det.get('severity'), str) else str(det.get('severity', '')).lower()
+                if 'danger' in severity:
+                    color = (0, 0, 255)  # Red - Critical
+                    line_thickness = 4
+                elif 'warning' in severity:
+                    color = (0, 165, 255)  # Orange - Warning
+                    line_thickness = 3
+                elif 'info' in severity:
+                    color = (0, 255, 0)  # Green - Info
+                    line_thickness = 2
+                else:
+                    color = (255, 0, 0)  # Blue - Default
+                    line_thickness = 2
+                
+                # Draw bounding box with enhanced styling
+                cv2.rectangle(annotated_frame, (x1, y1), (x2, y2), color, line_thickness)
+                
+                # Prepare enhanced label
+                class_label = det.get('class_name', det.get('detection_type', 'Unknown'))
+                confidence = det.get('confidence', 0)
+                violation_type = det.get('violation_type', '')
+                
+                # Create comprehensive label
+                if violation_type:
+                    label = f"{violation_type.replace('_', ' ')} ({int(confidence * 100)}%)"
+                else:
+                    label = f"{class_label} ({int(confidence * 100)}%)"
+                
+                # Calculate text dimensions for background
+                font = cv2.FONT_HERSHEY_SIMPLEX
+                font_scale = 0.6
+                thickness = 2
+                (text_w, text_h), baseline = cv2.getTextSize(label, font, font_scale, thickness)
+                
+                # Draw label background with transparency effect
+                cv2.rectangle(annotated_frame, (x1, y1 - text_h - baseline - 8), 
+                            (x1 + text_w + 8, y1), color, -1)
+                
+                # Draw label text
+                cv2.putText(annotated_frame, label, (x1 + 4, y1 - baseline - 4), 
+                          font, font_scale, (255, 255, 255), thickness)
             
-            # Add detection count overlay with background
-            detection_text = f"Detections: {len(last_detections)}"
-            (det_w, det_h), _ = cv2.getTextSize(detection_text, cv2.FONT_HERSHEY_SIMPLEX, 0.7, 2)
-            cv2.rectangle(frame, (5, 5), (det_w + 15, det_h + 15), (0, 0, 0), -1)
-            cv2.putText(frame, detection_text, (10, det_h + 10), 
-                       cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
+            # Enhanced overlay information
+            overlay_color = (0, 0, 0)
+            text_color = (0, 255, 0)
             
-            # Add frame counter
-            frame_text = f"Frame: {frame_count}"
-            (frame_w, frame_h), _ = cv2.getTextSize(frame_text, cv2.FONT_HERSHEY_SIMPLEX, 0.5, 1)
-            cv2.rectangle(frame, (5, det_h + 25), (frame_w + 15, det_h + frame_h + 35), (0, 0, 0), -1)
-            cv2.putText(frame, frame_text, (10, det_h + frame_h + 30), 
+            # Detection count and performance info
+            detection_text = f"Detections: {len(last_detections)} | Det FPS: {detection_fps:.1f}"
+            (det_w, det_h), _ = cv2.getTextSize(detection_text, cv2.FONT_HERSHEY_SIMPLEX, 0.6, 2)
+            cv2.rectangle(annotated_frame, (5, 5), (det_w + 15, det_h + 15), overlay_color, -1)
+            cv2.putText(annotated_frame, detection_text, (10, det_h + 10), 
+                       cv2.FONT_HERSHEY_SIMPLEX, 0.6, text_color, 2)
+            
+            # Model info
+            model_name = Path(cv_detector.model_path).name if cv_detector.model_path else "Mock Mode"
+            model_text = f"Model: {model_name}"
+            (model_w, model_h), _ = cv2.getTextSize(model_text, cv2.FONT_HERSHEY_SIMPLEX, 0.5, 1)
+            cv2.rectangle(annotated_frame, (5, det_h + 25), (model_w + 15, det_h + model_h + 35), overlay_color, -1)
+            cv2.putText(annotated_frame, model_text, (10, det_h + model_h + 30), 
                        cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1)
             
-            # Encode frame as JPEG with good quality
-            encode_params = [cv2.IMWRITE_JPEG_QUALITY, 85]
-            ret, buffer = cv2.imencode('.jpg', frame, encode_params)
+            # Camera info
+            cam_text = f"Camera: {camera_id} | Frame: {frame_count} | {actual_width}x{actual_height}"
+            (cam_w, cam_h), _ = cv2.getTextSize(cam_text, cv2.FONT_HERSHEY_SIMPLEX, 0.4, 1)
+            cv2.rectangle(annotated_frame, (5, det_h + model_h + 45), (cam_w + 15, det_h + model_h + cam_h + 55), overlay_color, -1)
+            cv2.putText(annotated_frame, cam_text, (10, det_h + model_h + cam_h + 50), 
+                       cv2.FONT_HERSHEY_SIMPLEX, 0.4, (200, 200, 200), 1)
+            
+            # Status indicator (top right)
+            status_text = "LIVE YOLOv8"
+            status_color = (0, 255, 0) if cv_detector.initialized else (0, 0, 255)
+            (status_w, status_h), _ = cv2.getTextSize(status_text, cv2.FONT_HERSHEY_SIMPLEX, 0.6, 2)
+            cv2.rectangle(annotated_frame, (actual_width - status_w - 15, 5), (actual_width - 5, status_h + 15), (0, 0, 0), -1)
+            cv2.putText(annotated_frame, status_text, (actual_width - status_w - 10, status_h + 10), 
+                       cv2.FONT_HERSHEY_SIMPLEX, 0.6, status_color, 2)
+            
+            # Encode frame with optimized quality for streaming
+            encode_params = [cv2.IMWRITE_JPEG_QUALITY, 80, cv2.IMWRITE_JPEG_OPTIMIZE, 1]
+            ret, buffer = cv2.imencode('.jpg', annotated_frame, encode_params)
             if not ret:
                 logger.warning("Failed to encode frame")
                 continue
             
             frame_bytes = buffer.tobytes()
             
-            # Yield frame in multipart format
+            # Yield frame in multipart format for MJPEG streaming
             yield (b'--frame\r\n'
                    b'Content-Type: image/jpeg\r\n\r\n' + frame_bytes + b'\r\n')
             
-            # No sleep - stream as fast as possible
-            
     except GeneratorExit:
-        logger.info(f"Stream closed by client after {frame_count} frames")
+        logger.info(f"YOLOv8 stream closed by client after {frame_count} frames")
     except Exception as e:
-        logger.error(f"Error in camera stream: {e}")
+        logger.error(f"Error in YOLOv8 camera stream: {e}")
     finally:
-        cap.release()
+        if cap:
+            cap.release()
         logger.info(f"Released camera {camera_id}, processed {frame_count} frames")
 
 @router.get("/stream/live")
@@ -493,22 +561,79 @@ async def stream_live_camera(camera_id: int = Query(0, description="Camera devic
 @router.get("/stream/status")
 async def get_stream_status():
     """
-    Check if camera streaming is available
+    Check if camera streaming is available and get YOLO model info
     """
     try:
         cap = cv2.VideoCapture(0)
         is_available = cap.isOpened()
         cap.release()
         
+        # Get YOLO model information
+        model_info = {
+            "loaded": cv_detector.yolo_model is not None,
+            "model_path": cv_detector.model_path if cv_detector.model_path else "None",
+            "model_name": Path(cv_detector.model_path).name if cv_detector.model_path else "Mock Mode",
+            "initialized": cv_detector.initialized,
+            "confidence_threshold": cv_detector.detection_confidence_threshold
+        }
+        
+        if cv_detector.yolo_model and hasattr(cv_detector.yolo_model, 'names'):
+            model_info["classes"] = list(cv_detector.yolo_model.names.values()) if cv_detector.yolo_model.names else []
+            model_info["num_classes"] = len(cv_detector.yolo_model.names) if cv_detector.yolo_model.names else 0
+        
         return {
             "status": "available" if is_available else "unavailable",
             "camera_available": is_available,
-            "yolo_loaded": cv_detector.yolo_model is not None,
-            "message": "Camera ready for streaming" if is_available else "No camera detected"
+            "yolo_model": model_info,
+            "message": "Camera ready for YOLOv8 streaming" if is_available else "No camera detected",
+            "stream_endpoint": "/cv/stream/live?camera_id=0"
         }
     except Exception as e:
         return {
             "status": "error",
             "camera_available": False,
-            "message": str(e)
+            "yolo_model": {"loaded": False, "error": str(e)},
+            "message": f"Error checking camera status: {str(e)}"
+        }
+
+@router.get("/stream/test/{camera_id}")
+async def test_camera_connection(camera_id: int):
+    """
+    Test if a specific camera can be opened
+    """
+    try:
+        cap = cv2.VideoCapture(camera_id)
+        if cap.isOpened():
+            # Get camera properties
+            width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+            height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+            fps = cap.get(cv2.CAP_PROP_FPS)
+            
+            # Try to read a frame
+            ret, frame = cap.read()
+            cap.release()
+            
+            return {
+                "camera_id": camera_id,
+                "status": "available",
+                "can_read_frame": ret,
+                "properties": {
+                    "width": width,
+                    "height": height,
+                    "fps": fps
+                },
+                "message": f"Camera {camera_id} is working properly"
+            }
+        else:
+            cap.release()
+            return {
+                "camera_id": camera_id,
+                "status": "unavailable",
+                "message": f"Cannot open camera {camera_id}"
+            }
+    except Exception as e:
+        return {
+            "camera_id": camera_id,
+            "status": "error",
+            "message": f"Error testing camera {camera_id}: {str(e)}"
         }

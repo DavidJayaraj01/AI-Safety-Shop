@@ -49,14 +49,20 @@ class CVDetector:
             logger.warning("YOLO not available. Running in mock mode.")
             return
             
-        # Try to find model files
+        # Try to find model files (prioritize custom PPE detection models)
         possible_paths = [
-            Path(__file__).parent.parent / "models" / "best.pt",  # /backend/app/models/best.pt
-            Path(__file__).parent.parent / "models" / "yolov8n.pt",  # /backend/app/models/yolov8n.pt
-            Path(__file__).parent.parent.parent.parent / "models" / "best.pt",
-            Path(__file__).parent.parent.parent.parent / "models" / "yolov8n.pt",
+            Path(__file__).parent.parent / "models" / "ppe-detection.pt",  # Custom PPE model
+            Path(__file__).parent.parent / "models" / "best.pt",  # Trained custom model
+            Path(__file__).parent.parent / "models" / "yolov8n.pt",  # Standard YOLOv8 nano
+            Path(__file__).parent.parent / "models" / "yolov8s.pt",  # Standard YOLOv8 small
+            Path(__file__).parent.parent / "models" / "yolov8m.pt",  # Standard YOLOv8 medium
+            Path(__file__).parent.parent.parent.parent / "AI-smart-shop" / "ppe-detection.pt",
+            Path(__file__).parent.parent.parent.parent / "AI-smart-shop" / "yolov8n.pt",
+            Path("models/ppe-detection.pt"),
             Path("models/best.pt"),
             Path("models/yolov8n.pt"),
+            Path("ppe-detection.pt"),  # Root directory
+            Path("yolov8n.pt"),
         ]
         
         for model_path in possible_paths:
@@ -68,10 +74,26 @@ class CVDetector:
                     self.yolo_model = YOLO(str(model_path))
                     self.model_path = str(model_path)
                     self.initialized = True
-                    logger.info(f"YOLO model loaded successfully: {model_path.name}")
+                    
+                    # Log model info
+                    model_info = f"Model: {model_path.name}, Classes: {len(self.yolo_model.names) if self.yolo_model.names else 'Unknown'}"
+                    if self.yolo_model.names:
+                        logger.info(f"Available classes: {list(self.yolo_model.names.values())}")
+                    logger.info(f"YOLO model loaded successfully: {model_info}")
                     return
                 except Exception as e:
                     logger.error(f"Failed to load model from {model_path}: {e}")
+                    
+        # If no local model found, try to download YOLOv8n as fallback
+        try:
+            logger.info("No local model found. Downloading YOLOv8n...")
+            self.yolo_model = YOLO('yolov8n.pt')  # This will download automatically
+            self.model_path = 'yolov8n.pt'
+            self.initialized = True
+            logger.info("YOLOv8n downloaded and loaded successfully")
+            return
+        except Exception as e:
+            logger.error(f"Failed to download YOLOv8n: {e}")
                     
         if not self.initialized:
             logger.warning("No YOLO model found. Running in mock detection mode.")
@@ -106,7 +128,7 @@ class CVDetector:
     
     def detect_from_frame(self, frame: np.ndarray, camera_id: int = 0) -> List[Dict[str, Any]]:
         """
-        Detect safety violations from a video frame
+        Detect safety violations from a video frame using YOLOv8
         
         Args:
             frame: OpenCV image (numpy array)
@@ -119,15 +141,22 @@ class CVDetector:
             return self._generate_mock_detections(camera_id)
         
         try:
-            # Run YOLO detection
-            results = self.yolo_model(frame, conf=self.detection_confidence_threshold)
+            # Run YOLOv8 detection with optimized settings for real-time
+            results = self.yolo_model(
+                frame, 
+                conf=self.detection_confidence_threshold,
+                iou=0.5,  # NMS IoU threshold
+                max_det=100,  # Maximum detections
+                verbose=False  # Reduce logging
+            )
             
             detections = []
             for result in results:
-                for box in result.boxes:
-                    detection = self._process_yolo_detection(box, camera_id, result.names)
-                    if detection:
-                        detections.append(detection)
+                if result.boxes is not None and len(result.boxes) > 0:
+                    for box in result.boxes:
+                        detection = self._process_yolo_detection(box, camera_id, result.names)
+                        if detection:
+                            detections.append(detection)
             
             return detections
             
@@ -169,53 +198,93 @@ class CVDetector:
             return None
     
     def _map_class_to_violation(self, class_name: str):
-        """Map YOLO class names to violation types"""
-        class_name_lower = class_name.lower()
+        """Map YOLO class names to violation types with comprehensive safety detection"""
+        class_name_lower = class_name.lower().strip()
         
-        # PPE Detection mappings
-        if 'no-hardhat' in class_name_lower or 'no_hardhat' in class_name_lower or 'no-helmet' in class_name_lower:
+        # PPE Detection mappings (most critical safety violations)
+        if any(term in class_name_lower for term in ['no-hardhat', 'no_hardhat', 'no-helmet', 'no_helmet', 'hardhat_violation']):
             return (DetectionType.PPE_VIOLATION, ViolationType.NO_HELMET, 
-                    AlertSeverity.DANGER, f"Worker without hard hat detected")
+                    AlertSeverity.DANGER, f"Critical: Worker without hard hat detected - {class_name}")
         
-        elif 'no-safety-vest' in class_name_lower or 'no_vest' in class_name_lower or 'no-vest' in class_name_lower:
+        elif any(term in class_name_lower for term in ['no-safety-vest', 'no_vest', 'no-vest', 'vest_violation', 'no_safety_vest']):
             return (DetectionType.PPE_VIOLATION, ViolationType.NO_VEST,
-                    AlertSeverity.WARNING, f"Worker without safety vest detected")
+                    AlertSeverity.WARNING, f"Warning: Worker without safety vest detected - {class_name}")
         
-        elif 'no-gloves' in class_name_lower or 'no_gloves' in class_name_lower:
+        elif any(term in class_name_lower for term in ['no-gloves', 'no_gloves', 'gloves_violation']):
             return (DetectionType.PPE_VIOLATION, ViolationType.NO_GLOVES,
-                    AlertSeverity.WARNING, f"Worker without gloves detected")
+                    AlertSeverity.WARNING, f"Warning: Worker without gloves detected - {class_name}")
         
-        elif 'no-mask' in class_name_lower or 'no_mask' in class_name_lower:
+        elif any(term in class_name_lower for term in ['no-mask', 'no_mask', 'mask_violation', 'no_face_mask']):
             return (DetectionType.PPE_VIOLATION, ViolationType.NO_MASK,
-                    AlertSeverity.WARNING, f"Worker without face mask detected")
+                    AlertSeverity.WARNING, f"Warning: Worker without face mask detected - {class_name}")
         
-        elif 'hardhat' in class_name_lower or 'helmet' in class_name_lower:
+        elif any(term in class_name_lower for term in ['no-goggles', 'no_goggles', 'no_safety_glasses', 'eye_protection_violation']):
+            return (DetectionType.PPE_VIOLATION, ViolationType.NO_GLOVES,  # Using available enum
+                    AlertSeverity.WARNING, f"Warning: Worker without eye protection - {class_name}")
+        
+        # Positive PPE detections (compliance)
+        elif any(term in class_name_lower for term in ['hardhat', 'helmet', 'hard_hat', 'safety_helmet']):
             return (DetectionType.PPE_VIOLATION, None,
-                    AlertSeverity.INFO, f"PPE compliant - {class_name}")
+                    AlertSeverity.INFO, f"PPE Compliant: Hard hat detected - {class_name}")
         
-        elif 'vest' in class_name_lower or 'safety-vest' in class_name_lower:
+        elif any(term in class_name_lower for term in ['vest', 'safety-vest', 'safety_vest', 'hi-vis']):
             return (DetectionType.PPE_VIOLATION, None,
-                    AlertSeverity.INFO, f"PPE compliant - {class_name}")
+                    AlertSeverity.INFO, f"PPE Compliant: Safety vest detected - {class_name}")
         
-        # Person detection
-        elif 'person' in class_name_lower or 'worker' in class_name_lower:
+        elif any(term in class_name_lower for term in ['gloves', 'safety_gloves', 'work_gloves']):
+            return (DetectionType.PPE_VIOLATION, None,
+                    AlertSeverity.INFO, f"PPE Compliant: Gloves detected - {class_name}")
+        
+        # Person/Worker detection
+        elif class_name_lower in ['person', 'worker', 'employee', 'human']:
             return (DetectionType.UNSAFE_BEHAVIOR, None,
-                    AlertSeverity.INFO, f"Worker detected - {class_name}")
+                    AlertSeverity.INFO, f"Worker detected in area - {class_name}")
         
-        # Fire/Smoke detection
-        elif 'fire' in class_name_lower or 'smoke' in class_name_lower:
+        # Fire and emergency detection
+        elif any(term in class_name_lower for term in ['fire', 'flame', 'burning']):
             return (DetectionType.FIRE_SMOKE, None,
-                    AlertSeverity.DANGER, f"Fire/Smoke detected")
+                    AlertSeverity.DANGER, f"EMERGENCY: Fire detected - {class_name}")
         
-        # Vehicle detection
-        elif 'forklift' in class_name_lower or 'vehicle' in class_name_lower or 'truck' in class_name_lower:
+        elif any(term in class_name_lower for term in ['smoke', 'fumes', 'gas']):
+            return (DetectionType.FIRE_SMOKE, None,
+                    AlertSeverity.DANGER, f"EMERGENCY: Smoke/fumes detected - {class_name}")
+        
+        # Vehicle and equipment detection
+        elif any(term in class_name_lower for term in ['forklift', 'crane', 'excavator', 'bulldozer']):
+            return (DetectionType.VEHICLE_COLLISION, None,
+                    AlertSeverity.WARNING, f"Heavy equipment detected - {class_name}")
+        
+        elif any(term in class_name_lower for term in ['vehicle', 'truck', 'car', 'van']):
             return (DetectionType.VEHICLE_COLLISION, None,
                     AlertSeverity.WARNING, f"Vehicle detected - {class_name}")
         
-        # Default
-        else:
+        # Hazardous behavior detection
+        elif any(term in class_name_lower for term in ['running', 'climbing', 'falling', 'unsafe_posture']):
+            return (DetectionType.UNSAFE_BEHAVIOR, None,
+                    AlertSeverity.WARNING, f"Unsafe behavior detected - {class_name}")
+        
+        elif any(term in class_name_lower for term in ['phone', 'mobile', 'cellphone', 'smartphone']):
+            return (DetectionType.UNSAFE_BEHAVIOR, None,
+                    AlertSeverity.WARNING, f"Phone use detected in workplace - {class_name}")
+        
+        # Restricted area detection
+        elif any(term in class_name_lower for term in ['restricted', 'unauthorized', 'no_entry', 'danger_zone']):
+            return (DetectionType.HAZARD_ZONE, None,
+                    AlertSeverity.DANGER, f"Restricted area violation - {class_name}")
+        
+        # Common COCO classes that might be relevant
+        elif class_name_lower in ['bicycle', 'motorcycle']:
+            return (DetectionType.VEHICLE_COLLISION, None,
+                    AlertSeverity.INFO, f"Two-wheeler detected - {class_name}")
+        
+        elif class_name_lower in ['bottle', 'cup']:
             return (DetectionType.UNSAFE_BEHAVIOR, None,
                     AlertSeverity.INFO, f"Object detected - {class_name}")
+        
+        # Default for any other detection
+        else:
+            return (DetectionType.UNSAFE_BEHAVIOR, None,
+                    AlertSeverity.INFO, f"Object detected: {class_name}")
     
     def detect_violations(self, camera_id: int, frame: Optional[Any] = None) -> List[Dict[str, Any]]:
         """
