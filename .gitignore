@@ -1,11 +1,12 @@
 # Python
+
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
 .Python
 build/
-develop-eggs/
+git rm -r --cached venv backend/venv __pycache__develop-eggs/
 dist/
 downloads/
 eggs/
