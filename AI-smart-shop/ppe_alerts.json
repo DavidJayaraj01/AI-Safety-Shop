@@ -1,0 +1,5045 @@
+[
+  {
+    "timestamp": "2025-10-16T12:44:00.939353",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "vest",
+      "goggles",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:01.022276",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:01.062289",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:01.101177",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:01.103801",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:01.149278",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:01.151782",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:01.193209",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "goggles",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:01.195445",
+    "person_id": 3,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:01.236618",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:01.239230",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:01.241432",
+    "person_id": 3,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:01.284012",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:01.286905",
+    "person_id": 3,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:01.326698",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:01.329601",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:01.332026",
+    "person_id": 3,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:01.376642",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:01.379008",
+    "person_id": 3,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:01.425233",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:01.428169",
+    "person_id": 3,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:01.470120",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:01.472915",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:01.475207",
+    "person_id": 3,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:01.517227",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:01.519874",
+    "person_id": 3,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:01.561671",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:01.564671",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:01.567129",
+    "person_id": 3,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:01.614190",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:01.618109",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:01.620440",
+    "person_id": 3,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "vest",
+      "goggles",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:01.664342",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:01.667390",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:01.712379",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:01.715767",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:01.718130",
+    "person_id": 3,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:01.805291",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:01.808489",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:01.853600",
+    "person_id": 3,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:01.898802",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:01.902122",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:01.904500",
+    "person_id": 3,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:01.950953",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "goggles",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:01.954164",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "vest",
+      "goggles",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:01.956580",
+    "person_id": 3,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:02.007431",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:02.009738",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "goggles",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:02.011462",
+    "person_id": 3,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:02.085905",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "goggles",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:02.125770",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:02.128529",
+    "person_id": 3,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:02.166587",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:02.169816",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:02.216878",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:02.220126",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:02.267318",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:02.270686",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:02.317952",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:02.321412",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:02.366376",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:02.369687",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:02.410472",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "vest",
+      "goggles",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:02.413669",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:02.458227",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:02.502416",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:02.549369",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:02.552734",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:02.599612",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:02.603093",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:02.649786",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "goggles",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:02.653257",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "vest"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:02.700730",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:02.748802",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:02.793737",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:02.797237",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "goggles",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:02.884872",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "goggles",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:02.930772",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "goggles",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:02.934265",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:02.981421",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:02.984932",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:03.031130",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:03.034654",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:03.078441",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:03.081830",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "goggles",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:03.129952",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:03.133479",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:03.180721",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:03.184307",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:03.230887",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:03.234609",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:03.237356",
+    "person_id": 3,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:03.285144",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:03.288814",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "goggles",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:03.291514",
+    "person_id": 3,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:03.338018",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "vest",
+      "goggles"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:03.341551",
+    "person_id": 3,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:03.389033",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:03.392649",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:03.395409",
+    "person_id": 3,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:03.441883",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:03.445579",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:03.448441",
+    "person_id": 3,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "vest",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:03.498773",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "goggles",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:03.502557",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:03.505454",
+    "person_id": 3,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:03.553488",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:03.557152",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:03.560005",
+    "person_id": 3,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:03.609083",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:03.612806",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:03.615663",
+    "person_id": 3,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:03.656926",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:03.660549",
+    "person_id": 3,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:03.707327",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "vest",
+      "goggles"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:03.711070",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:03.758658",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:03.849060",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:03.852875",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:03.894566",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:03.898159",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:03.946128",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:03.950212",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:03.999606",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:04.003488",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:04.043883",
+    "person_id": 3,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:04.094135",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:04.098036",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "goggles",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:04.101257",
+    "person_id": 3,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:04.149155",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:04.152008",
+    "person_id": 3,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "vest",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:04.192477",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:04.195208",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "goggles",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:04.239304",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "goggles",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:04.288783",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:04.292653",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:04.335069",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:04.338850",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:04.381021",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "goggles",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:04.384691",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "goggles",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:04.387818",
+    "person_id": 3,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:04.426166",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:04.474449",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:04.478395",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "vest",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:04.524483",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:04.528458",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:04.575494",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:04.622951",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:04.626946",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:04.673432",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:04.677436",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "goggles",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:04.680595",
+    "person_id": 3,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:04.722228",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:04.725432",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:04.728830",
+    "person_id": 3,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:04.776792",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "goggles",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:04.780937",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:04.824334",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:04.828129",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:04.831386",
+    "person_id": 3,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:04.871952",
+    "person_id": 3,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:04.916109",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "goggles",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:04.919904",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:04.923162",
+    "person_id": 3,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:04.971726",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:04.975862",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:04.979057",
+    "person_id": 3,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:05.024339",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "goggles",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:05.028484",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:05.074861",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:05.079120",
+    "person_id": 3,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:05.119506",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:05.123758",
+    "person_id": 3,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "vest",
+      "goggles",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:05.170146",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "goggles",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:05.174029",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "vest",
+      "goggles"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:05.214124",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:05.217300",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:05.258722",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:05.261983",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:05.310620",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:05.314834",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:05.359944",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:05.363965",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:05.412010",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:05.416381",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:05.461012",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "goggles",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:05.464501",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:05.513260",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:05.557616",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:05.606128",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:05.610415",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:05.659074",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:05.663527",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:05.711312",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:05.757228",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:05.761694",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:05.804557",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "goggles",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:05.808816",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:05.855912",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:05.860320",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "goggles",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:05.902934",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:05.905922",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:05.945827",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:05.948975",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:05.996176",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:06.000667",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:06.050383",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:06.054505",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:06.103983",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:06.108445",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:06.149953",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:06.153461",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:06.199845",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:06.203445",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:06.248864",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "goggles",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:06.251909",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "vest",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:06.293778",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:06.296900",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:06.336454",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:06.339526",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:06.381123",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:06.384295",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:06.424526",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:06.473542",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "goggles",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:06.478265",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:06.518226",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:06.521321",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:06.566364",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:06.619985",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:06.669918",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:06.674596",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:06.720651",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "vest",
+      "goggles"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:06.725280",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:06.768551",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:06.773070",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:06.816428",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "goggles",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:06.865870",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:06.912716",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:06.916716",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:06.960794",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "goggles",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:06.964203",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:07.013041",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:07.062938",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:07.067763",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:07.115154",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:07.168774",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:07.217890",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:07.222593",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:07.267610",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:07.272046",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:07.314077",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:07.318643",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "vest",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:07.357439",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:07.360784",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:07.403218",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:07.407647",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:07.453372",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:07.501269",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:07.504531",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:07.551174",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:07.555677",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:23.009817",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:23.015222",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:23.171540",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "goggles",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:23.177222",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "vest"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:23.239148",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:23.243754",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:23.288818",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:23.330828",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:23.335309",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:23.383208",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "vest",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:23.431638",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "goggles",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:23.521080",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:23.567216",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "goggles",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:23.661176",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "vest",
+      "goggles"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:23.711010",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:23.759707",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:23.806052",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:23.854552",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "vest",
+      "goggles"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:23.903839",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:23.953247",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "vest",
+      "goggles",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:24.002222",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:24.046319",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "vest"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:24.094860",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:24.143605",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:24.192223",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:24.241057",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "vest"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:24.246047",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:24.294735",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:24.299767",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:24.338652",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:24.387751",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:24.432926",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:24.478235",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:24.482108",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:24.525703",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:24.574861",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "goggles",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:24.623162",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:24.670027",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:24.674741",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:24.717854",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:24.722600",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:24.803119",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:24.853667",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:24.904288",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:24.909158",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "vest",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:24.952469",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:24.956194",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:25.004728",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:25.009912",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:25.054515",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:25.100346",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:25.105230",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:25.156293",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:25.161180",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:25.211066",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "vest",
+      "goggles",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:25.216325",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:25.265235",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:25.314893",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:25.366342",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:25.417748",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "goggles",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:25.468167",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:25.473270",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:25.558940",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:25.562648",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:25.605574",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:25.649389",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:25.652924",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:25.694776",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "goggles",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:25.698494",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:25.740009",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:25.743543",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:25.782023",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "goggles",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:25.819689",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:25.823237",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:25.860664",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "vest",
+      "goggles"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:25.896712",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:25.933958",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:25.937508",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:25.978191",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:25.983633",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:26.027066",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:26.076319",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:26.126117",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:26.131558",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "vest"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:26.176712",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:26.182466",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:26.229205",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:26.234671",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:26.284622",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:26.335003",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:26.385284",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:26.390785",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:26.436952",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "vest",
+      "goggles",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:26.441534",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "goggles",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:26.492907",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:26.498458",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:26.540673",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:26.545972",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:26.590186",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:26.595443",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:26.640727",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:26.646792",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:26.734625",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:26.740164",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "vest"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:26.783728",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:26.787424",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:26.829282",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:26.833237",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:26.874133",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:26.914374",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:26.918200",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:26.959502",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "goggles",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:26.963369",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:27.004937",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:27.047412",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:27.089366",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:27.094746",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:27.139635",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:27.189382",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:27.194649",
+    "person_id": 3,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:27.241031",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:27.246458",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:27.293140",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:27.337788",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:27.341565",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:27.388137",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:27.393543",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:27.437098",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:27.442441",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:27.485409",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "goggles",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:27.536330",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:27.579324",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:27.585162",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:27.635914",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "vest",
+      "goggles",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:27.641657",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:27.686782",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:27.692159",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:27.736324",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:27.741771",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:27.786346",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:27.790651",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:27.844407",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:27.850344",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:27.899600",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "goggles",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:27.905428",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:27.955681",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:27.961248",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:28.010350",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:28.016271",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:28.063742",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "vest"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:28.067941",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:28.108136",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:28.112027",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:28.152836",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:28.156718",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:28.194912",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:28.232727",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:28.236999",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:28.273745",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:28.311474",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:28.349630",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:28.353851",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:28.395898",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:28.440700",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:28.486802",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:28.527678",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:28.571010",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "goggles",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:28.614602",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "goggles",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:28.663084",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:28.705505",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "vest",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:28.748668",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:28.791426",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:28.834208",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "vest",
+      "goggles",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:28.876094",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:28.917979",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:28.959781",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:28.963725",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:29.012946",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:29.061765",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:29.112256",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:29.161155",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:29.167778",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:29.217681",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:29.223815",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:29.319485",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:29.325753",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:29.369797",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:29.375591",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:29.424776",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:29.430651",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:29.474990",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "vest",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:29.480872",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:29.524742",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:29.576380",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:29.582576",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:29.628247",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:29.679850",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:29.686349",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:29.732983",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:29.779056",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest",
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T12:44:29.783253",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "vest",
+      "goggles",
+      "gloves"
+    ],
+    "severity": "HIGH",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T13:07:23.874624",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T13:07:23.879064",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T13:07:25.344047",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T13:07:25.349789",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T13:07:26.852496",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T13:07:26.858449",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "vest"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T13:07:26.864642",
+    "person_id": 3,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "goggles",
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T13:07:28.358249",
+    "person_id": 1,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "gloves"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  },
+  {
+    "timestamp": "2025-10-16T13:07:28.364076",
+    "person_id": 2,
+    "alert_type": "PPE_VIOLATION",
+    "missing_ppe": [
+      "helmet",
+      "goggles"
+    ],
+    "severity": "MEDIUM",
+    "location": "Camera_1"
+  }
+]
