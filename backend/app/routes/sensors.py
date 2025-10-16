@@ -54,30 +54,6 @@ async def get_all_sensors(db: AsyncSession = Depends(get_db)):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@router.get("/{sensor_type}")
-async def get_sensor_data(
-    sensor_type: str,
-    db: AsyncSession = Depends(get_db)
-):
-    """Get current reading from a specific sensor"""
-    try:
-        # Validate sensor type
-        if sensor_type not in ["gas", "temperature", "vibration", "ultrasonic", "environmental", "rfid"]:
-            raise HTTPException(status_code=400, detail="Invalid sensor type")
-        
-        mock_data = generate_mock_sensor_data()
-        sensor_data = mock_data.get(sensor_type, {})
-        
-        return {
-            "sensor_type": sensor_type,
-            **sensor_data,
-            "timestamp": datetime.utcnow().isoformat()
-        }
-    except HTTPException:
-        raise
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-
 @router.get("/history")
 async def get_sensor_history(
     hours: int = Query(default=24, ge=1, le=168),
@@ -100,6 +76,66 @@ async def get_sensor_history(
             result[sensor_type] = list(reversed(history))
         
         return result
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@router.get("/statistics")
+async def get_statistics(db: AsyncSession = Depends(get_db)):
+    """Get sensor statistics"""
+    try:
+        return {
+            "totalWorkers": random.randint(10, 20),
+            "activeAlerts": random.randint(0, 5),
+            "systemUptime": round(random.uniform(95, 99.9), 1),
+            "dataPoints": random.randint(10000, 50000)
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@router.get("/rfid/logs")
+async def get_rfid_logs(
+    days: int = Query(default=7, ge=1, le=30),
+    db: AsyncSession = Depends(get_db)
+):
+    """Get RFID access logs"""
+    try:
+        # Generate mock RFID logs
+        logs = []
+        for i in range(10):
+            logs.append({
+                "id": i + 1,
+                "workerId": f"W{1000 + i}",
+                "workerName": f"Worker {i + 1}",
+                "action": random.choice(["entry", "exit"]),
+                "location": random.choice(["Gate A", "Gate B", "Workshop", "Storage"]),
+                "timestamp": (datetime.utcnow() - timedelta(hours=i)).isoformat()
+            })
+        
+        return logs
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@router.get("/{sensor_type}")
+async def get_sensor_data(
+    sensor_type: str,
+    db: AsyncSession = Depends(get_db)
+):
+    """Get current reading from a specific sensor"""
+    try:
+        # Validate sensor type
+        if sensor_type not in ["gas", "temperature", "vibration", "ultrasonic", "environmental", "rfid"]:
+            raise HTTPException(status_code=400, detail="Invalid sensor type")
+        
+        mock_data = generate_mock_sensor_data()
+        sensor_data = mock_data.get(sensor_type, {})
+        
+        return {
+            "sensor_type": sensor_type,
+            **sensor_data,
+            "timestamp": datetime.utcnow().isoformat()
+        }
+    except HTTPException:
+        raise
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
@@ -152,40 +188,4 @@ async def create_sensor_data(
         return {"message": "Sensor data created successfully", "id": db_sensor_data.id}
     except Exception as e:
         await db.rollback()
-        raise HTTPException(status_code=500, detail=str(e))
-
-@router.get("/rfid/logs")
-async def get_rfid_logs(
-    days: int = Query(default=7, ge=1, le=30),
-    db: AsyncSession = Depends(get_db)
-):
-    """Get RFID access logs"""
-    try:
-        # Generate mock RFID logs
-        logs = []
-        for i in range(10):
-            logs.append({
-                "id": i + 1,
-                "workerId": f"W{1000 + i}",
-                "workerName": f"Worker {i + 1}",
-                "action": random.choice(["entry", "exit"]),
-                "location": random.choice(["Gate A", "Gate B", "Workshop", "Storage"]),
-                "timestamp": (datetime.utcnow() - timedelta(hours=i)).isoformat()
-            })
-        
-        return logs
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-
-@router.get("/statistics")
-async def get_statistics(db: AsyncSession = Depends(get_db)):
-    """Get sensor statistics"""
-    try:
-        return {
-            "totalWorkers": random.randint(10, 20),
-            "activeAlerts": random.randint(0, 5),
-            "systemUptime": round(random.uniform(95, 99.9), 1),
-            "dataPoints": random.randint(10000, 50000)
-        }
-    except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

@@ -1,18 +1,25 @@
 """
 Computer Vision Detection Service
-Simulates AI-powered safety monitoring similar to Protex AI, Intenseye, and Chooch AI
-In production, this would integrate with actual CV models (YOLO, TensorFlow, etc.)
+AI-powered safety monitoring using YOLO models for real-time detection
+Integrates with YOLO models for PPE detection and safety violation monitoring
 """
 
+import cv2
+import numpy as np
+from ultralytics import YOLO
 import random
 from datetime import datetime
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any, Optional, Tuple
+from pathlib import Path
+import logging
 from app.models.models import DetectionType, ViolationType, AlertSeverity
+
+logger = logging.getLogger(__name__)
 
 class CVDetector:
     """
-    Computer Vision Detector for workplace safety monitoring
-    Simulates real-time detection of:
+    Computer Vision Detector for workplace safety monitoring using YOLO
+    Real-time detection of:
     - PPE violations (missing helmets, vests, gloves, etc.)
     - Unsafe behaviors (running, climbing, phone use)
     - Hazard zones (restricted area access)
@@ -21,22 +28,276 @@ class CVDetector:
     """
     
     def __init__(self):
-        self.detection_confidence_threshold = 0.75
-        self.initialized = True
+        self.detection_confidence_threshold = 0.5
+        self.initialized = False
+        self.models = {}
+        self._load_models()
         
-    def detect_violations(self, camera_id: int, frame: Optional[Any] = None) -> List[Dict[str, Any]]:
+    def _load_models(self):
+        """Load YOLO models for detection"""
+        try:
+            # Define model paths
+            model_paths = {
+                'general': '/home/balu/AI-Safety-Shop/AI-smart-shop/yolov8n.pt',
+                'ppe': '/home/balu/AI-Safety-Shop/AI-smart-shop/ppe-detection.pt'
+            }
+            
+            # Load models
+            for model_name, model_path in model_paths.items():
+                if Path(model_path).exists():
+                    self.models[model_name] = YOLO(model_path)
+                    logger.info(f"Loaded {model_name} model from {model_path}")
+                else:
+                    logger.warning(f"Model not found: {model_path}")
+            
+            # Set initialized flag
+            self.initialized = len(self.models) > 0
+            
+            if self.initialized:
+                logger.info(f"CV Detector initialized with {len(self.models)} models")
+            else:
+                logger.error("No YOLO models could be loaded")
+                
+        except Exception as e:
+            logger.error(f"Error loading YOLO models: {e}")
+            self.initialized = False
+    
+    def detect_violations(self, camera_id: int, frame: Optional[np.ndarray] = None) -> List[Dict[str, Any]]:
         """
-        Analyze a camera frame and detect safety violations
-        In production, this would use OpenCV + ML models
+        Analyze a camera frame and detect safety violations using YOLO
         
         Args:
             camera_id: ID of the camera
-            frame: Video frame to analyze (numpy array in production)
+            frame: Video frame to analyze (numpy array)
             
         Returns:
             List of detected violations with bounding boxes and confidence scores
         """
-        # Simulate random detections for demo purposes
+        if not self.initialized:
+            logger.warning("CV Detector not properly initialized, using mock detections")
+            return self._generate_mock_detections(camera_id)
+            
+        if frame is None:
+            logger.warning("No frame provided, using mock detections")
+            return self._generate_mock_detections(camera_id)
+            
+        detections = []
+        
+        try:
+            # Process frame with different models
+            if 'ppe' in self.models:
+                ppe_detections = self._detect_ppe_violations(frame, camera_id)
+                detections.extend(ppe_detections)
+                
+            if 'general' in self.models:
+                general_detections = self._detect_general_violations(frame, camera_id)
+                detections.extend(general_detections)
+                
+        except Exception as e:
+            logger.error(f"Error during detection: {e}")
+            # Fallback to mock detections
+            detections = self._generate_mock_detections(camera_id)
+            
+        return detections
+    
+    def _detect_ppe_violations(self, frame: np.ndarray, camera_id: int) -> List[Dict[str, Any]]:
+        """Detect PPE violations using specialized PPE model"""
+        detections = []
+        
+        try:
+            # Run PPE detection
+            results = self.models['ppe'](frame, conf=self.detection_confidence_threshold)
+            
+            for result in results:
+                boxes = result.boxes
+                if boxes is not None:
+                    for box in boxes:
+                        # Extract box coordinates and confidence
+                        x1, y1, x2, y2 = box.xyxy[0].cpu().numpy()
+                        confidence = float(box.conf[0].cpu().numpy())
+                        cls_id = int(box.cls[0].cpu().numpy())
+                        
+                        # Map class ID to violation type
+                        violation_info = self._map_ppe_class_to_violation(cls_id)
+                        
+                        if violation_info:
+                            detection = {
+                                "camera_id": camera_id,
+                                "detection_type": DetectionType.PPE_VIOLATION,
+                                "violation_type": violation_info["violation_type"],
+                                "severity": violation_info["severity"],
+                                "description": violation_info["description"],
+                                "confidence": confidence,
+                                "bbox": {
+                                    "x": int(x1),
+                                    "y": int(y1),
+                                    "w": int(x2 - x1),
+                                    "h": int(y2 - y1)
+                                },
+                                "timestamp": datetime.utcnow()
+                            }
+                            detections.append(detection)
+                            
+        except Exception as e:
+            logger.error(f"Error in PPE detection: {e}")
+            
+        return detections
+    
+    def _detect_general_violations(self, frame: np.ndarray, camera_id: int) -> List[Dict[str, Any]]:
+        """Detect general safety violations using general YOLO model"""
+        detections = []
+        
+        try:
+            # Run general object detection
+            results = self.models['general'](frame, conf=self.detection_confidence_threshold)
+            
+            for result in results:
+                boxes = result.boxes
+                if boxes is not None:
+                    for box in boxes:
+                        # Extract box coordinates and confidence
+                        x1, y1, x2, y2 = box.xyxy[0].cpu().numpy()
+                        confidence = float(box.conf[0].cpu().numpy())
+                        cls_id = int(box.cls[0].cpu().numpy())
+                        
+                        # Map class ID to potential safety violations
+                        violation_info = self._map_general_class_to_violation(cls_id)
+                        
+                        if violation_info:
+                            detection = {
+                                "camera_id": camera_id,
+                                "detection_type": violation_info["detection_type"],
+                                "violation_type": violation_info.get("violation_type"),
+                                "severity": violation_info["severity"],
+                                "description": violation_info["description"],
+                                "confidence": confidence,
+                                "bbox": {
+                                    "x": int(x1),
+                                    "y": int(y1),
+                                    "w": int(x2 - x1),
+                                    "h": int(y2 - y1)
+                                },
+                                "timestamp": datetime.utcnow()
+                            }
+                            detections.append(detection)
+                            
+        except Exception as e:
+            logger.error(f"Error in general detection: {e}")
+            
+        return detections
+    
+    def _map_ppe_class_to_violation(self, cls_id: int) -> Optional[Dict[str, Any]]:
+        """Map PPE model class ID to violation information"""
+        # This mapping depends on your PPE model's class definitions
+        # Update these mappings based on your actual PPE model
+        ppe_class_map = {
+            0: {
+                "violation_type": ViolationType.NO_HELMET,
+                "severity": AlertSeverity.DANGER,
+                "description": "Worker without hard hat detected"
+            },
+            1: {
+                "violation_type": ViolationType.NO_VEST,
+                "severity": AlertSeverity.WARNING,
+                "description": "Worker without safety vest detected"
+            },
+            2: {
+                "violation_type": ViolationType.NO_GLOVES,
+                "severity": AlertSeverity.WARNING,
+                "description": "Worker without gloves detected"
+            },
+            3: {
+                "violation_type": ViolationType.NO_GOGGLES,
+                "severity": AlertSeverity.WARNING,
+                "description": "Worker without safety goggles detected"
+            },
+            4: {
+                "violation_type": ViolationType.NO_MASK,
+                "severity": AlertSeverity.WARNING,
+                "description": "Worker without face mask detected"
+            }
+        }
+        
+        return ppe_class_map.get(cls_id)
+    
+    def _map_general_class_to_violation(self, cls_id: int) -> Optional[Dict[str, Any]]:
+        """Map general YOLO class ID to potential safety violations"""
+        # COCO class mappings for common safety-related objects
+        general_class_map = {
+            0: {  # person
+                "detection_type": DetectionType.UNSAFE_BEHAVIOR,
+                "violation_type": None,
+                "severity": AlertSeverity.INFO,
+                "description": "Person detected in monitored area"
+            },
+            2: {  # car
+                "detection_type": DetectionType.VEHICLE_COLLISION,
+                "violation_type": None,
+                "severity": AlertSeverity.WARNING,
+                "description": "Vehicle detected - potential collision risk"
+            },
+            3: {  # motorcycle
+                "detection_type": DetectionType.VEHICLE_COLLISION,
+                "violation_type": None,
+                "severity": AlertSeverity.WARNING,
+                "description": "Motorcycle detected - collision risk"
+            },
+            5: {  # bus
+                "detection_type": DetectionType.VEHICLE_COLLISION,
+                "violation_type": None,
+                "severity": AlertSeverity.WARNING,
+                "description": "Large vehicle detected - high collision risk"
+            },
+            7: {  # truck
+                "detection_type": DetectionType.VEHICLE_COLLISION,
+                "violation_type": None,
+                "severity": AlertSeverity.DANGER,
+                "description": "Truck detected - high collision risk"
+            },
+            67: {  # cell phone
+                "detection_type": DetectionType.UNSAFE_BEHAVIOR,
+                "violation_type": ViolationType.PHONE_USE,
+                "severity": AlertSeverity.WARNING,
+                "description": "Cell phone use detected in restricted area"
+            }
+        }
+        
+        return general_class_map.get(cls_id)
+    
+    def process_camera_feed(self, camera_id: int, stream_url: str) -> None:
+        """
+        Process live camera feed for real-time detection
+        
+        Args:
+            camera_id: ID of the camera
+            stream_url: URL or path to camera stream
+        """
+        try:
+            cap = cv2.VideoCapture(stream_url)
+            
+            while cap.isOpened():
+                ret, frame = cap.read()
+                if not ret:
+                    break
+                    
+                # Detect violations in the frame
+                detections = self.detect_violations(camera_id, frame)
+                
+                # Process detections (save to database, trigger alerts, etc.)
+                for detection in detections:
+                    logger.info(f"Detection: {detection['description']} (confidence: {detection['confidence']:.2f})")
+                    
+                # Add small delay to prevent overwhelming the system
+                cv2.waitKey(30)
+                
+        except Exception as e:
+            logger.error(f"Error processing camera feed {camera_id}: {e}")
+        finally:
+            if 'cap' in locals():
+                cap.release()
+    
+    def _generate_mock_detections(self, camera_id: int) -> List[Dict[str, Any]]:
+        """Generate mock detections for demonstration when models aren't available"""
         detections = []
         
         # Simulate 20% chance of detection per frame

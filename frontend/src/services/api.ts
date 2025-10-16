@@ -113,7 +113,12 @@ export const createWebSocketConnection = (
   onError?: (error: Event) => void
 ): WebSocket => {
   const wsUrl = API_BASE_URL.replace('http', 'ws');
+  console.log('Attempting to connect to WebSocket:', `${wsUrl}/ws`);
   const ws = new WebSocket(`${wsUrl}/ws`);
+  
+  ws.onopen = () => {
+    console.log('WebSocket connection opened successfully');
+  };
   
   ws.onmessage = (event: MessageEvent) => {
     try {
@@ -129,11 +134,15 @@ export const createWebSocketConnection = (
     if (onError) onError(error);
   };
   
-  ws.onclose = () => {
-    console.log('WebSocket connection closed');
-    setTimeout(() => {
-      createWebSocketConnection(onMessage, onError);
-    }, 5000);
+  ws.onclose = (event) => {
+    console.log('WebSocket connection closed:', event.code, event.reason);
+    // Only attempt reconnection if it wasn't a manual close
+    if (event.code !== 1000) {
+      setTimeout(() => {
+        console.log('Attempting to reconnect...');
+        createWebSocketConnection(onMessage, onError);
+      }, 5000);
+    }
   };
   
   return ws;

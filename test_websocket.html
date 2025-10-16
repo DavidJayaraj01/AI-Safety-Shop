@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebSocket Test</title>
+</head>
+<body>
+    <h1>WebSocket Connection Test</h1>
+    <div id="status">Connecting...</div>
+    <div id="messages"></div>
+
+    <script>
+        const statusDiv = document.getElementById('status');
+        const messagesDiv = document.getElementById('messages');
+        
+        function log(message) {
+            console.log(message);
+            messagesDiv.innerHTML += '<p>' + new Date().toISOString() + ': ' + message + '</p>';
+        }
+        
+        try {
+            const ws = new WebSocket('ws://localhost:8000/ws');
+            
+            ws.onopen = function() {
+                statusDiv.textContent = 'Connected';
+                statusDiv.style.color = 'green';
+                log('WebSocket connection opened');
+                
+                // Send a test message
+                ws.send(JSON.stringify({type: 'ping', timestamp: Date.now()}));
+            };
+            
+            ws.onmessage = function(event) {
+                log('Received: ' + event.data);
+            };
+            
+            ws.onerror = function(error) {
+                statusDiv.textContent = 'Error';
+                statusDiv.style.color = 'red';
+                log('WebSocket error: ' + JSON.stringify(error));
+            };
+            
+            ws.onclose = function(event) {
+                statusDiv.textContent = 'Closed';
+                statusDiv.style.color = 'orange';
+                log('WebSocket closed: code=' + event.code + ', reason=' + event.reason);
+            };
+            
+        } catch (error) {
+            statusDiv.textContent = 'Failed';
+            statusDiv.style.color = 'red';
+            log('Failed to create WebSocket: ' + error.message);
+        }
+    </script>
+</body>
+</html>

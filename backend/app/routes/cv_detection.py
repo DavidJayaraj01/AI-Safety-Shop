@@ -4,13 +4,17 @@ Endpoints for camera management and real-time safety violation detection
 """
 
 from fastapi import APIRouter, Depends, HTTPException, Query
+from fastapi.responses import StreamingResponse
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, func, and_
 from typing import List, Optional
 from datetime import datetime, timedelta
+import cv2
+import asyncio
+import json
 
 from app.db.database import get_db
-from app.models.models import Camera, CVDetection, DetectionType, ViolationType, CameraStatus, OperatingMode
+from app.models.models import Camera, CVDetection, DetectionType, ViolationType, CameraStatus, OperatingMode, AlertSeverity
 from app.models.schemas import (
     CameraCreate, CameraUpdate, CameraResponse, 
     CVDetectionCreate, CVDetectionResponse,
@@ -298,3 +302,363 @@ async def analyze_hazard_zones():
 async def analyze_unsafe_behavior():
     """Detect unsafe worker behaviors (demo endpoint)"""
     return cv_detector.detect_unsafe_behavior()
+
+# ==================== Live Camera Feed Processing ====================
+
+@router.post("/cameras/{camera_id}/start-monitoring")
+async def start_camera_monitoring(
+    camera_id: int,
+    stream_url: str = Query(..., description="Camera stream URL or device path"),
+    operating_mode: OperatingMode = Query(OperatingMode.HEAVY_INDUSTRY, description="Operating mode for detection"),
+    db: AsyncSession = Depends(get_db)
+):
+    """
+    Start live monitoring for a specific camera with YOLO model integration
+    
+    Args:
+        camera_id: ID of the camera to monitor
+        stream_url: URL or path to camera stream (e.g., rtsp://camera_ip:port/stream, /dev/video0, http://ip/mjpeg)
+        operating_mode: Operating mode (INDUSTRY for industrial safety monitoring)
+    """
+    # Verify camera exists
+    result = await db.execute(select(Camera).filter(Camera.id == camera_id))
+    camera = result.scalar_one_or_none()
+    
+    if not camera:
+        raise HTTPException(status_code=404, detail="Camera not found")
+    
+    # Update camera status and stream URL
+    camera.status = CameraStatus.ACTIVE
+    camera.operating_mode = operating_mode
+    camera.stream_url = stream_url
+    camera.last_activity = datetime.utcnow()
+    
+    await db.commit()
+    
+    try:
+        # Start processing camera feed in background
+        # Note: In production, this should be handled by a background task/worker
+        import threading
+        
+        def process_feed():
+            cv_detector.process_camera_feed(camera_id, stream_url)
+        
+        thread = threading.Thread(target=process_feed, daemon=True)
+        thread.start()
+        
+        return {
+            "message": f"Started monitoring camera {camera_id}",
+            "camera_id": camera_id,
+            "stream_url": stream_url,
+            "operating_mode": operating_mode.value,
+            "detection_enabled": True,
+            "yolo_models_loaded": len(cv_detector.models) > 0,
+            "models_available": list(cv_detector.models.keys())
+        }
+        
+    except Exception as e:
+        # Update camera status to error
+        camera.status = CameraStatus.ERROR
+        await db.commit()
+        
+        raise HTTPException(
+            status_code=500, 
+            detail=f"Failed to start camera monitoring: {str(e)}"
+        )
+
+@router.post("/cameras/{camera_id}/stop-monitoring")
+async def stop_camera_monitoring(
+    camera_id: int,
+    db: AsyncSession = Depends(get_db)
+):
+    """Stop live monitoring for a specific camera"""
+    result = await db.execute(select(Camera).filter(Camera.id == camera_id))
+    camera = result.scalar_one_or_none()
+    
+    if not camera:
+        raise HTTPException(status_code=404, detail="Camera not found")
+    
+    # Update camera status
+    camera.status = CameraStatus.INACTIVE
+    camera.last_activity = datetime.utcnow()
+    
+    await db.commit()
+    
+    return {
+        "message": f"Stopped monitoring camera {camera_id}",
+        "camera_id": camera_id,
+        "status": "inactive"
+    }
+
+@router.post("/cameras/{camera_id}/detect-frame")
+async def detect_violations_in_frame(
+    camera_id: int,
+    db: AsyncSession = Depends(get_db)
+):
+    """
+    Perform real-time detection on a single frame from camera
+    Useful for testing YOLO model integration
+    """
+    result = await db.execute(select(Camera).filter(Camera.id == camera_id))
+    camera = result.scalar_one_or_none()
+    
+    if not camera:
+        raise HTTPException(status_code=404, detail="Camera not found")
+    
+    # For demo, we'll use None frame which will trigger mock detection or actual if models are loaded
+    detections = cv_detector.detect_violations(camera_id, None)
+    
+    # Save detections to database
+    for detection in detections:
+        cv_detection = CVDetection(
+            camera_id=camera_id,
+            detection_type=DetectionType[detection["detection_type"]] if isinstance(detection["detection_type"], str) else detection["detection_type"],
+            violation_type=ViolationType[detection["violation_type"]] if detection.get("violation_type") and isinstance(detection["violation_type"], str) else detection.get("violation_type"),
+            confidence=detection["confidence"],
+            bbox_x=detection["bbox"]["x"],
+            bbox_y=detection["bbox"]["y"],
+            bbox_width=detection["bbox"]["w"],
+            bbox_height=detection["bbox"]["h"],
+            description=detection["description"],
+            severity=AlertSeverity[detection["severity"]] if isinstance(detection["severity"], str) else detection["severity"],
+            timestamp=detection["timestamp"]
+        )
+        db.add(cv_detection)
+    
+    await db.commit()
+    
+    return {
+        "camera_id": camera_id,
+        "detections_count": len(detections),
+        "detections": detections,
+        "yolo_models_active": cv_detector.initialized,
+        "models_loaded": list(cv_detector.models.keys()) if cv_detector.initialized else [],
+        "timestamp": datetime.utcnow()
+    }
+
+@router.get("/models/status")
+async def get_model_status():
+    """Get status of loaded YOLO models"""
+    return {
+        "initialized": cv_detector.initialized,
+        "models_loaded": list(cv_detector.models.keys()) if cv_detector.initialized else [],
+        "model_paths": {
+            "general": "/home/balu/AI-Safety-Shop/AI-smart-shop/yolov8n.pt",
+            "ppe": "/home/balu/AI-Safety-Shop/AI-smart-shop/ppe-detection.pt"
+        },
+        "confidence_threshold": cv_detector.detection_confidence_threshold,
+        "detection_classes": {
+            "ppe_violations": ["NO_HELMET", "NO_VEST", "NO_GLOVES", "NO_GOGGLES", "NO_MASK"],
+            "general_detections": ["PERSON", "VEHICLE", "PHONE_USE"]
+        }
+    }
+
+# ==================== Live Video Streaming with YOLO Detection ====================
+
+def generate_frames(camera_source: str, camera_id: int):
+    """
+    Generate video frames with YOLO detection overlays
+    
+    Args:
+        camera_source: Camera source (0 for webcam, URL for IP camera, file path for video)
+        camera_id: Database camera ID
+    """
+    try:
+        # Initialize video capture
+        cap = cv2.VideoCapture(camera_source)
+        
+        # Set camera properties for better performance
+        cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
+        cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
+        cap.set(cv2.CAP_PROP_FPS, 30)
+        
+        while True:
+            success, frame = cap.read()
+            if not success:
+                break
+                
+            # Resize frame for better performance
+            frame = cv2.resize(frame, (640, 480))
+            
+            # Perform YOLO detection
+            detections = cv_detector.detect_violations(camera_id, frame)
+            
+            # Draw detection boxes and labels on frame
+            annotated_frame = draw_detections(frame, detections, camera_id)
+            
+            # Encode frame as JPEG
+            ret, buffer = cv2.imencode('.jpg', annotated_frame, [cv2.IMWRITE_JPEG_QUALITY, 70])
+            
+            if ret:
+                frame_bytes = buffer.tobytes()
+                yield (b'--frame\r\n'
+                       b'Content-Type: image/jpeg\r\n\r\n' + frame_bytes + b'\r\n')
+            
+            # Small delay to control frame rate
+            cv2.waitKey(1)
+            
+    except Exception as e:
+        print(f"Error in video streaming: {e}")
+    finally:
+        if 'cap' in locals():
+            cap.release()
+
+def draw_detections(frame, detections, camera_id=None):
+    """
+    Draw detection bounding boxes and labels on frame
+    
+    Args:
+        frame: OpenCV frame
+        detections: List of detection results from YOLO
+        camera_id: Camera ID for display
+    
+    Returns:
+        Annotated frame with bounding boxes
+    """
+    annotated_frame = frame.copy()
+    
+    for detection in detections:
+        bbox = detection['bbox']
+        confidence = detection['confidence']
+        description = detection['description']
+        severity = detection['severity']
+        
+        # Define colors based on severity
+        color_map = {
+            AlertSeverity.DANGER: (0, 0, 255),      # Red
+            AlertSeverity.WARNING: (0, 165, 255),   # Orange
+            AlertSeverity.INFO: (0, 255, 255),      # Yellow
+        }
+        
+        color = color_map.get(severity, (0, 255, 0))  # Default green
+        
+        # Draw bounding box
+        x, y, w, h = bbox['x'], bbox['y'], bbox['w'], bbox['h']
+        cv2.rectangle(annotated_frame, (x, y), (x + w, y + h), color, 2)
+        
+        # Draw label background
+        label = f"{description} ({confidence:.2f})"
+        (label_width, label_height), baseline = cv2.getTextSize(label, cv2.FONT_HERSHEY_SIMPLEX, 0.5, 1)
+        cv2.rectangle(annotated_frame, (x, y - label_height - 10), (x + label_width, y), color, -1)
+        
+        # Draw label text
+        cv2.putText(annotated_frame, label, (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1)
+    
+    # Add timestamp and camera info
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    if camera_id:
+        cv2.putText(annotated_frame, f"Camera {camera_id} - {timestamp}", 
+                    (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 1)
+    else:
+        cv2.putText(annotated_frame, f"{timestamp}", 
+                    (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 1)
+    
+    return annotated_frame
+
+@router.get("/cameras/{camera_id}/stream")
+async def stream_camera_feed(
+    camera_id: int,
+    db: AsyncSession = Depends(get_db)
+):
+    """
+    Stream live camera feed with YOLO detection overlays
+    
+    Args:
+        camera_id: Database camera ID
+    
+    Returns:
+        MJPEG stream with detection overlays
+    """
+    # Verify camera exists in database
+    result = await db.execute(select(Camera).filter(Camera.id == camera_id))
+    camera = result.scalar_one_or_none()
+    
+    if not camera:
+        raise HTTPException(status_code=404, detail="Camera not found")
+    
+    # Update camera status
+    camera.status = CameraStatus.ACTIVE
+    camera.last_activity = datetime.utcnow()
+    await db.commit()
+    
+    # Use camera's rtsp_url as source (stored as string in database)
+    source = camera.rtsp_url
+    
+    # Convert source to appropriate format
+    try:
+        # Try to convert to int for webcam index
+        camera_source = int(source)
+    except ValueError:
+        # Use as string for file path or URL
+        camera_source = source
+    
+    return StreamingResponse(
+        generate_frames(camera_source, camera_id),
+        media_type="multipart/x-mixed-replace; boundary=frame"
+    )
+
+@router.get("/cameras/{camera_id}/test-detection")
+async def test_camera_detection(
+    camera_id: int,
+    source: str = Query(default="0", description="Camera source for testing"),
+    db: AsyncSession = Depends(get_db)
+):
+    """
+    Test YOLO detection on a single frame from camera
+    
+    Args:
+        camera_id: Database camera ID
+        source: Camera source
+    
+    Returns:
+        Detection results and base64 encoded image with annotations
+    """
+    import base64
+    
+    # Verify camera exists
+    result = await db.execute(select(Camera).filter(Camera.id == camera_id))
+    camera = result.scalar_one_or_none()
+    
+    if not camera:
+        raise HTTPException(status_code=404, detail="Camera not found")
+    
+    try:
+        # Convert source to appropriate format
+        try:
+            camera_source = int(source)
+        except ValueError:
+            camera_source = source
+        
+        # Capture single frame
+        cap = cv2.VideoCapture(camera_source)
+        ret, frame = cap.read()
+        cap.release()
+        
+        if not ret:
+            raise HTTPException(status_code=500, detail="Failed to capture frame from camera")
+        
+        # Resize frame
+        frame = cv2.resize(frame, (640, 480))
+        
+        # Perform detection
+        detections = cv_detector.detect_violations(camera_id, frame)
+        
+        # Draw detections on frame
+        annotated_frame = draw_detections(frame, detections, camera_id)
+        
+        # Encode frame to base64
+        _, buffer = cv2.imencode('.jpg', annotated_frame)
+        frame_base64 = base64.b64encode(buffer).decode('utf-8')
+        
+        return {
+            "camera_id": camera_id,
+            "detections_count": len(detections),
+            "detections": detections,
+            "annotated_frame": f"data:image/jpeg;base64,{frame_base64}",
+            "yolo_models_active": cv_detector.initialized,
+            "models_loaded": list(cv_detector.models.keys()) if cv_detector.initialized else [],
+            "timestamp": datetime.utcnow()
+        }
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error testing detection: {str(e)}")

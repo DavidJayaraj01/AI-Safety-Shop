@@ -11,21 +11,35 @@ load_dotenv()
 # Database URL
 DATABASE_URL = os.getenv(
     "DATABASE_URL",
-    "postgresql://postgres:password@localhost:5432/ai_safety_monitoring"
+    "sqlite+aiosqlite:///./ai_safety_monitoring.db"
 )
 
-# Convert to async URL for asyncpg
-ASYNC_DATABASE_URL = DATABASE_URL.replace("postgresql://", "postgresql+asyncpg://")
+# Convert to async URL based on database type
+if DATABASE_URL.startswith("postgresql://"):
+    ASYNC_DATABASE_URL = DATABASE_URL.replace("postgresql://", "postgresql+asyncpg://")
+elif DATABASE_URL.startswith("sqlite"):
+    ASYNC_DATABASE_URL = DATABASE_URL
+else:
+    ASYNC_DATABASE_URL = DATABASE_URL
 
-# Create async engine
-engine = create_async_engine(
-    ASYNC_DATABASE_URL,
-    echo=True,
-    future=True,
-    pool_pre_ping=True,
-    pool_size=10,
-    max_overflow=20
-)
+# Create async engine with appropriate settings
+if ASYNC_DATABASE_URL.startswith("sqlite"):
+    # SQLite specific settings
+    engine = create_async_engine(
+        ASYNC_DATABASE_URL,
+        echo=True,
+        future=True
+    )
+else:
+    # PostgreSQL specific settings
+    engine = create_async_engine(
+        ASYNC_DATABASE_URL,
+        echo=True,
+        future=True,
+        pool_pre_ping=True,
+        pool_size=10,
+        max_overflow=20
+    )
 
 # Create async session maker
 AsyncSessionLocal = sessionmaker(
