@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { incidentAPI, analyticsAPI } from '../services/api';
 import type { Incident } from '../types';
-import { FileText, Download, Calendar, AlertTriangle, CheckCircle } from 'lucide-react';
+import { Download, CheckCircle } from 'lucide-react';
 import { format } from 'date-fns';
 
 export const Reports = () => {

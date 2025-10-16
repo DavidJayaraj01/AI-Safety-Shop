@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { settingsAPI, modeAPI } from '../services/api';
-import type { SystemSettings, ModeConfig } from '../types';
+import { settingsAPI } from '../services/api';
+import type { SystemSettings } from '../types';
 import { Save, Bell, Camera, Thermometer, Wind } from 'lucide-react';
 import toast from 'react-hot-toast';
 

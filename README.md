@@ -2,6 +2,19 @@
 
 A comprehensive full-stack IoT safety monitoring system using ESP32, YOLOv8n for PPE detection, multi-sensor integration, and AI-powered analytics.
 
+![Status](https://img.shields.io/badge/Status-In_Development-yellow)
+![Frontend](https://img.shields.io/badge/Frontend-React_+_TypeScript-61DAFB?logo=react)
+![Backend](https://img.shields.io/badge/Backend-FastAPI_+_Python-009688?logo=fastapi)
+![AI](https://img.shields.io/badge/AI-YOLOv8-FF6F00)
+
+## ⚠️ IMPORTANT: PPE Detection Setup Required
+
+**Current Status**: The system is functional but uses **SIMULATED** PPE detection.
+
+The standard YOLOv8n model detects common objects (person, car, chair) but NOT PPE items (helmet, vest, gloves).
+
+**To get real PPE detection**, see: [`SETUP_PPE_MODEL.md`](SETUP_PPE_MODEL.md)
+
 ## 🚀 Features
 
 ### Core Capabilities

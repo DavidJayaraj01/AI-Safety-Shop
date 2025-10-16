@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { cameraAPI } from '../services/api';
 import { Video, VideoOff, Play, Pause } from 'lucide-react';
 

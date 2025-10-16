@@ -11,12 +11,14 @@ import {
 import { useState, useEffect } from 'react';
 import { useAlertStore } from '../context/AlertContext';
 import { useModeStore } from '../context/ModeContext';
+import { useWebSocketStore } from '../context/WebSocketStore';
 
 export const Navbar = () => {
   const location = useLocation();
   const [darkMode, setDarkMode] = useState(false);
   const { unreadCount } = useAlertStore();
   const { mode } = useModeStore();
+  const { isConnected } = useWebSocketStore();
 
   useEffect(() => {
     if (darkMode) {
@@ -43,6 +45,17 @@ export const Navbar = () => {
             </h1>
             <div className="ml-4 px-3 py-1 rounded-full text-xs font-medium bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200">
               {mode === 'heavy_industry' ? 'Heavy Industry' : 'Shop Floor'} Mode
+            </div>
+            
+            {/* Connection Status Indicator */}
+            <div 
+              className="ml-3 flex items-center cursor-default"
+              title={isConnected ? 'Connected to real-time updates' : 'Disconnected - Attempting to reconnect...'}
+            >
+              <div className={`w-2 h-2 rounded-full ${isConnected ? 'bg-success-500' : 'bg-danger-500'} ${isConnected ? 'animate-pulse' : ''}`} />
+              <span className="ml-2 text-xs text-gray-600 dark:text-gray-400">
+                {isConnected ? 'Live' : 'Offline'}
+              </span>
             </div>
           </div>
 
