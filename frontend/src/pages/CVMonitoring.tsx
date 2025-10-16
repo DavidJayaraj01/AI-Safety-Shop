@@ -112,20 +112,20 @@ const CVMonitoring: React.FC = () => {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="w-full space-y-4 sm:space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
-            <Eye className="h-8 w-8 text-primary" />
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
+            <Eye className="h-6 w-6 sm:h-8 sm:w-8 text-primary" />
             AI Computer Vision Monitoring
           </h1>
-          <p className="text-gray-600 dark:text-gray-400 mt-1">
+          <p className="text-gray-600 dark:text-gray-400 mt-1 text-sm sm:text-base">
             Real-time safety violation detection using computer vision
           </p>
         </div>
-        <div className="flex items-center gap-2">
-          <span className={`px-3 py-1 rounded-full text-sm font-semibold ${
+        <div className="flex items-center gap-2 w-full sm:w-auto">
+          <span className={`px-3 py-1 rounded-full text-xs sm:text-sm font-semibold w-full sm:w-auto text-center ${
             mode === 'heavy-industry' 
               ? 'bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-400'
               : 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400'
@@ -137,23 +137,23 @@ const CVMonitoring: React.FC = () => {
 
       {/* YOLO Model Status Panel */}
       {streamStatus && (
-        <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg shadow-lg p-6 text-white">
-          <div className="flex items-center justify-between mb-4">
+        <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg shadow-lg p-4 sm:p-6 text-white">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 gap-3">
             <div className="flex items-center gap-3">
-              <Cpu className="h-8 w-8" />
+              <Cpu className="h-6 w-6 sm:h-8 sm:w-8" />
               <div>
-                <h3 className="text-xl font-bold">YOLOv8 Detection System</h3>
-                <p className="text-blue-100">Real-time AI safety monitoring</p>
+                <h3 className="text-lg sm:text-xl font-bold">YOLOv8 Detection System</h3>
+                <p className="text-blue-100 text-sm">Real-time AI safety monitoring</p>
               </div>
             </div>
-            <div className={`px-3 py-1 rounded-full text-sm font-bold ${
+            <div className={`px-3 py-1 rounded-full text-xs sm:text-sm font-bold ${
               streamStatus.yolo_model?.loaded ? 'bg-green-500' : 'bg-red-500'
             }`}>
               {streamStatus.yolo_model?.loaded ? '🟢 READY' : '🔴 NOT LOADED'}
             </div>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
             <div className="bg-white/10 rounded-lg p-4">
               <h4 className="font-semibold mb-2">Model Info</h4>
               <p className="text-sm">Model: {streamStatus.yolo_model?.model_name || 'Not loaded'}</p>
@@ -182,21 +182,21 @@ const CVMonitoring: React.FC = () => {
 
       {/* Live Camera Section */}
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
-        <div className="border-b border-gray-200 dark:border-gray-700 px-6 py-4">
-          <div className="flex items-center justify-between">
+        <div className="border-b border-gray-200 dark:border-gray-700 px-4 sm:px-6 py-4">
+          <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
             <div className="flex items-center gap-3">
-              <Monitor className="h-6 w-6 text-blue-600" />
+              <Monitor className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600" />
               <div>
-                <h2 className="text-xl font-bold text-gray-900 dark:text-white">Live YOLOv8 Detection</h2>
-                <p className="text-gray-600 dark:text-gray-400">Real-time safety monitoring with AI detection</p>
+                <h2 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">Live YOLOv8 Detection</h2>
+                <p className="text-gray-600 dark:text-gray-400 text-sm">Real-time safety monitoring with AI detection</p>
               </div>
             </div>
             
-            <div className="flex items-center gap-3">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full lg:w-auto">
               <select
                 value={liveCameraId}
                 onChange={(e) => setLiveCameraId(Number(e.target.value))}
-                className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
               >
                 <option value={0}>Camera 0 (Default)</option>
                 <option value={1}>Camera 1</option>
@@ -206,7 +206,7 @@ const CVMonitoring: React.FC = () => {
               <button
                 onClick={() => setShowLiveCamera(!showLiveCamera)}
                 disabled={!streamStatus?.camera_available && streamStatus !== null}
-                className={`px-6 py-2 rounded-lg font-semibold transition-colors flex items-center gap-2 ${
+                className={`px-4 sm:px-6 py-2 rounded-lg font-semibold transition-colors flex items-center justify-center gap-2 text-sm ${
                   showLiveCamera
                     ? 'bg-red-600 text-white hover:bg-red-700'
                     : 'bg-green-600 text-white hover:bg-green-700'
@@ -228,15 +228,15 @@ const CVMonitoring: React.FC = () => {
           </div>
         </div>
 
-        <div className="p-6">
+        <div className="p-4 sm:p-6">
           {showLiveCamera && streamStatus?.camera_available ? (
             <div className="relative">
               <div className="rounded-lg overflow-hidden border-2 border-blue-500 bg-black">
                 <img
                   src={liveStreamUrl}
                   alt="Live Camera Feed with YOLO Detection"
-                  className="w-full h-auto"
-                  style={{ maxHeight: '720px', objectFit: 'contain' }}
+                  className="w-full h-auto max-w-full"
+                  style={{ maxHeight: '70vh', objectFit: 'contain' }}
                   onError={(e) => {
                     console.error('Stream error:', e);
                     // Auto-retry after a brief delay instead of immediately showing error
@@ -257,19 +257,19 @@ const CVMonitoring: React.FC = () => {
                 />
               </div>
               
-              <div className="absolute top-4 left-4 flex flex-col gap-2">
-                <div className="bg-red-600 text-white px-3 py-1 rounded-full text-sm font-bold flex items-center gap-2 shadow-lg">
+              <div className="absolute top-2 sm:top-4 left-2 sm:left-4 flex flex-col gap-2">
+                <div className="bg-red-600 text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-bold flex items-center gap-2 shadow-lg">
                   <span className="w-2 h-2 bg-white rounded-full animate-pulse"></span>
                   🔴 LIVE YOLOv8
                 </div>
                 {streamStatus?.yolo_model?.loaded && (
-                  <div className="bg-green-600 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg">
+                  <div className="bg-green-600 text-white px-2 sm:px-3 py-1 rounded-full text-xs font-bold shadow-lg">
                     {streamStatus.yolo_model.model_name}
                   </div>
                 )}
               </div>
               
-              <div className="absolute bottom-4 left-4 bg-black/70 text-white px-3 py-2 rounded-lg text-sm">
+              <div className="absolute bottom-2 sm:bottom-4 left-2 sm:left-4 bg-black/70 text-white px-2 sm:px-3 py-1 sm:py-2 rounded-lg text-xs sm:text-sm">
                 <div>Camera {liveCameraId} • Real-time Detection</div>
                 <div className="text-xs text-gray-300">
                   Confidence: {((streamStatus?.yolo_model?.confidence_threshold || 0.75) * 100).toFixed(0)}%
@@ -277,27 +277,27 @@ const CVMonitoring: React.FC = () => {
               </div>
             </div>
           ) : !showLiveCamera ? (
-            <div className="text-center py-16 text-gray-500 dark:text-gray-400 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-900">
-              <CameraIcon className="h-20 w-20 mx-auto mb-4 opacity-50" />
-              <p className="text-xl font-semibold mb-2">Click "Start Stream" to begin live detection</p>
-              <p className="text-sm mt-2">
+            <div className="text-center py-8 sm:py-16 text-gray-500 dark:text-gray-400 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-900">
+              <CameraIcon className="h-12 w-12 sm:h-20 sm:w-20 mx-auto mb-4 opacity-50" />
+              <p className="text-lg sm:text-xl font-semibold mb-2">Click "Start Stream" to begin live detection</p>
+              <p className="text-sm mt-2 px-4">
                 {streamStatus?.message || 'Real-time YOLO detection with bounding boxes will appear here'}
               </p>
-              <div className="mt-6 flex items-center justify-center gap-6 text-sm">
+              <div className="mt-4 sm:mt-6 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 text-sm px-4">
                 <div className="flex items-center gap-2">
-                  <CheckCircle className="h-5 w-5 text-green-500" />
+                  <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 text-green-500" />
                   <span>PPE Detection</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CheckCircle className="h-5 w-5 text-orange-500" />
+                  <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 text-orange-500" />
                   <span>Fire/Smoke Detection</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CheckCircle className="h-5 w-5 text-blue-500" />
+                  <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 text-blue-500" />
                   <span>Vehicle Detection</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CheckCircle className="h-5 w-5 text-purple-500" />
+                  <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 text-purple-500" />
                   <span>Behavior Analysis</span>
                 </div>
               </div>
@@ -314,33 +314,33 @@ const CVMonitoring: React.FC = () => {
 
       {/* Statistics Cards */}
       {stats && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3 sm:gap-4">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4 sm:p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Total Cameras</p>
-                <p className="text-2xl font-bold text-gray-900 dark:text-white">{stats.total_cameras}</p>
+                <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Total Cameras</p>
+                <p className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">{stats.total_cameras}</p>
               </div>
-              <div className="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
-                <CameraIcon className="h-6 w-6 text-blue-600" />
+              <div className="p-2 sm:p-3 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
+                <CameraIcon className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600" />
               </div>
             </div>
-            <div className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+            <div className="mt-2 text-xs sm:text-sm text-gray-600 dark:text-gray-400">
               {stats.active_cameras} active
             </div>
           </div>
 
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4 sm:p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Today's Detections</p>
-                <p className="text-2xl font-bold text-gray-900 dark:text-white">{stats.total_detections_today}</p>
+                <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Today's Detections</p>
+                <p className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">{stats.total_detections_today}</p>
               </div>
-              <div className="p-3 bg-purple-100 dark:bg-purple-900/30 rounded-lg">
-                <Activity className="h-6 w-6 text-purple-600" />
+              <div className="p-2 sm:p-3 bg-purple-100 dark:bg-purple-900/30 rounded-lg">
+                <Activity className="h-5 w-5 sm:h-6 sm:w-6 text-purple-600" />
               </div>
             </div>
-            <div className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+            <div className="mt-2 text-xs sm:text-sm text-gray-600 dark:text-gray-400">
               Last 24 hours
             </div>
           </div>
@@ -417,12 +417,12 @@ const CVMonitoring: React.FC = () => {
       )}
 
       {/* Camera Grid */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-bold text-gray-900 dark:text-white">Camera Feeds</h2>
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4 sm:p-6">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 gap-3">
+          <h2 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">Camera Feeds</h2>
           <button
             onClick={() => setSelectedCamera(null)}
-            className={`px-3 py-1 rounded-lg text-sm transition-colors ${
+            className={`px-3 py-1 rounded-lg text-sm transition-colors w-full sm:w-auto ${
               selectedCamera === null
                 ? 'bg-blue-600 text-white'
                 : 'bg-gray-200 dark:bg-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-500'
@@ -443,7 +443,7 @@ const CVMonitoring: React.FC = () => {
             <p>No cameras configured</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4">
             {cameras.map((camera) => (
               <CameraFeed
                 key={camera.id}
@@ -465,22 +465,22 @@ const CVMonitoring: React.FC = () => {
       </div>
 
       {/* Violations List */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-bold text-gray-900 dark:text-white">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4 sm:p-6">
+        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between mb-4 gap-4">
+          <h2 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">
             Recent Violations
             {detections.filter(d => d.severity === 'danger' && !d.acknowledged).length > 0 && (
-              <span className="ml-2 px-2 py-1 bg-red-600 text-white text-sm rounded">
+              <span className="ml-2 px-2 py-1 bg-red-600 text-white text-xs sm:text-sm rounded">
                 {detections.filter(d => d.severity === 'danger' && !d.acknowledged).length} Critical
               </span>
             )}
           </h2>
 
-          <div className="flex gap-2">
+          <div className="flex flex-col sm:flex-row gap-2 w-full lg:w-auto">
             <select
               value={filterSeverity}
               onChange={(e) => setFilterSeverity(e.target.value)}
-              className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
             >
               <option value="all">All Severities</option>
               <option value="danger">Danger</option>
@@ -490,7 +490,7 @@ const CVMonitoring: React.FC = () => {
 
             <button
               onClick={() => setFilterAcknowledged(!filterAcknowledged)}
-              className={`px-4 py-2 rounded ${
+              className={`px-4 py-2 rounded text-sm ${
                 filterAcknowledged
                   ? 'bg-primary text-white'
                   : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'

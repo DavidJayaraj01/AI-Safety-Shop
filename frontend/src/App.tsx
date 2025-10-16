@@ -65,7 +65,7 @@ function App() {
             setIsSidebarOpen={setIsSidebarOpen}
           />
           
-          <div className="flex">
+          <div className="flex min-h-screen pt-16">
             <Sidebar 
               currentPage={currentPage} 
               setCurrentPage={setCurrentPage}
@@ -73,17 +73,19 @@ function App() {
               setIsOpen={setIsSidebarOpen}
             />
             
-            <main className="flex-1 p-6 lg:ml-0">
-              <div className="max-w-7xl mx-auto">
-                {renderPage()}
+            <main className="flex-1 w-full lg:ml-64 transition-all duration-300">
+              <div className="w-full h-full p-4 sm:p-6 lg:p-8">
+                <div className="w-full max-w-full">
+                  {renderPage()}
+                </div>
               </div>
             </main>
           </div>
 
           {/* Footer */}
-          <footer className="bg-white dark:bg-slate-800 border-t border-gray-200 dark:border-slate-700 mt-12">
-            <div className="max-w-7xl mx-auto px-6 py-4">
-              <div className="text-center text-sm text-gray-600 dark:text-gray-400">
+          <footer className="bg-white dark:bg-slate-800 border-t border-gray-200 dark:border-slate-700 mt-8 sm:mt-12">
+            <div className="w-full px-4 sm:px-6 lg:px-8 py-4">
+              <div className="text-center text-xs sm:text-sm text-gray-600 dark:text-gray-400">
                 <p>© 2024 AI-Powered Safety Monitoring System. All rights reserved.</p>
                 <p className="mt-1">Smart Shop Floors - Ensuring Workplace Safety with AI</p>
               </div>

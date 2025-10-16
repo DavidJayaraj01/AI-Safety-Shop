@@ -272,10 +272,10 @@ const Dashboard = () => {
   const activeSensors = getActiveSensors();
 
   return (
-    <div className="space-y-6">
+    <div className="w-full space-y-4 sm:space-y-6">
       {/* Connection Status Banner */}
       <div className={`card ${isConnected ? 'bg-success-50 dark:bg-success-900/20 border-2 border-success-300 dark:border-success-700' : 'bg-danger-50 dark:bg-danger-900/20 border-2 border-danger-300 dark:border-danger-700'}`}>
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
           <div className="flex items-center space-x-3">
             <div className={`h-3 w-3 rounded-full ${isConnected ? 'bg-success-500' : 'bg-danger-500'} animate-pulse`} />
             <div>
@@ -287,7 +287,7 @@ const Dashboard = () => {
               </p>
             </div>
           </div>
-          <div className="text-right">
+          <div className="text-left sm:text-right">
             <p className="text-xs text-gray-500 dark:text-gray-400">Current RFID Tag</p>
             <p className="text-lg font-bold text-gray-900 dark:text-white">{rfidTag}</p>
           </div>
@@ -295,7 +295,7 @@ const Dashboard = () => {
       </div>
 
       {/* Statistics Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3 sm:gap-4">
         <div className="card gradient-primary text-white">
           <div className="flex items-center justify-between">
             <div>
@@ -342,7 +342,7 @@ const Dashboard = () => {
       </div>
 
       {/* Mode Switch and Alerts */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
         <div className="lg:col-span-1">
           <ModeSwitch />
         </div>
@@ -352,11 +352,11 @@ const Dashboard = () => {
       </div>
 
       {/* Sensor Cards */}
-      <div>
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+      <div className="w-full">
+        <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">
           Live Sensor Monitoring
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-3 sm:gap-4">
           {activeSensors.map(sensor => (
             <SensorCard key={sensor.id} sensor={sensor} />
           ))}
@@ -364,11 +364,11 @@ const Dashboard = () => {
       </div>
 
       {/* Charts */}
-      <div>
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+      <div className="w-full">
+        <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">
           Real-Time Analytics
         </h2>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 sm:gap-6">
           {['temperature', 'humidity', 'smoke', 'distance'].map(sensorType => {
             const sensor = sensors.find(s => s.type === sensorType);
             return sensorHistory[sensorType] && sensor && (

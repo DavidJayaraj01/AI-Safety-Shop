@@ -33,7 +33,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, setCurrentPage, isSidebarO
   };
 
   return (
-    <nav className="bg-white dark:bg-slate-800 shadow-lg border-b border-gray-200 dark:border-slate-700">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-slate-800 shadow-lg border-b border-gray-200 dark:border-slate-700">
       <div className="px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           {/* Left section */}
