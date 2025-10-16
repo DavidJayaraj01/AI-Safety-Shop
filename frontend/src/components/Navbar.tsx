@@ -1,5 +1,4 @@
 import { 
-  ShieldCheck, 
   Settings, 
   Moon, 
   Sun, 
@@ -48,20 +47,16 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, setCurrentPage, isSidebarO
 
             {/* Logo and title */}
             <div className="flex items-center ml-2 lg:ml-0">
-              <div className={`p-2 rounded-lg ${
-                modeConfig.colors.primary === 'orange' 
-                  ? 'bg-orange-100 dark:bg-orange-900' 
-                  : 'bg-blue-100 dark:bg-blue-900'
-              }`}>
-                <ShieldCheck className={`h-8 w-8 ${
-                  modeConfig.colors.primary === 'orange'
-                    ? 'text-orange-600 dark:text-orange-400'
-                    : 'text-blue-600 dark:text-blue-400'
-                }`} />
+              <div className="p-2 rounded-lg bg-gradient-to-br from-cyan-100 to-orange-100 dark:from-cyan-900 dark:to-orange-900">
+                <img 
+                  src="/logo.png" 
+                  alt="AI-Smarter-Shop Logo" 
+                  className="h-10 w-10 object-contain"
+                />
               </div>
               <div className="ml-3">
                 <h1 className="text-xl font-bold text-gray-900 dark:text-white">
-                  AI Safety IoT Dashboard
+                  AI-Smarter-Shop
                 </h1>
                 <p className="text-sm text-gray-500 dark:text-gray-400">
                   {modeConfig.name}
