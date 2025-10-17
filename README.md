@@ -172,7 +172,7 @@ AI-Smarter-Shop is an enterprise-grade safety monitoring solution designed for i
 | **Data Science** | NumPy, Pandas | 1.26.2, 2.1.3 | Data analysis |
 | **ML Library** | Scikit-learn | 1.3.2 | Anomaly detection |
 | **Validation** | Pydantic | 2.5.0 | Request/response validation |
-| **WebSockets** | websockets | 12.0 | Real-time updates |
+| **WebSockets** | websocket | 12.0 | Real-time updates |
 
 ### Frontend Technologies
 
