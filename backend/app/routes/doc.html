@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Powered Safety Monitoring Documentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .update-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.9em;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        nav {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        nav a {
+            color: #667eea;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .content {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            margin-bottom: 30px;
+        }
+
+        section {
+            margin-bottom: 50px;
+        }
+
+        h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        h3 {
+            color: #764ba2;
+            font-size: 1.5em;
+            margin: 25px 0 15px;
+        }
+
+        h4 {
+            color: #555;
+            font-size: 1.2em;
+            margin: 20px 0 10px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #667eea15, #764ba215);
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            border-radius: 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.2);
+        }
+
+        .feature-card h4 {
+            color: #667eea;
+            margin-top: 0;
+        }
+
+        .tech-stack {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .tech-category {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-top: 3px solid #764ba2;
+        }
+
+        .tech-category h4 {
+            color: #764ba2;
+            margin-bottom: 15px;
+        }
+
+        .tech-list {
+            list-style: none;
+        }
+
+        .tech-list li {
+            padding: 5px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .tech-list li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #e83e8c;
+            font-size: 0.9em;
+        }
+
+        pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin: 20px 0;
+            border-left: 4px solid #667eea;
+        }
+
+        pre code {
+            background: none;
+            color: inherit;
+            padding: 0;
+        }
+
+        .alert-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .success-box {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .info-box {
+            background: #d1ecf1;
+            border-left: 4px solid #17a2b8;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .endpoint-card {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            border-left: 4px solid #667eea;
+        }
+
+        .endpoint-method {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.85em;
+            margin-right: 10px;
+        }
+
+        .get { background: #61affe; color: white; }
+        .post { background: #49cc90; color: white; }
+        .ws { background: #fca130; color: white; }
+
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        a {
+            color: #667eea;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+
+        .button {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin: 10px 10px 10px 0;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+            text-decoration: none;
+        }
+
+        footer {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            margin-top: 30px;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 1.8em; }
+            h2 { font-size: 1.5em; }
+            nav ul { flex-direction: column; }
+            .content { padding: 20px; }
+            .feature-grid, .tech-stack { grid-template-columns: 1fr; }
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #28a745;
+            margin-right: 8px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏭 AI-Powered Safety Monitoring</h1>
+            <p class="subtitle">Smarter Shop Floors with AI-Driven Hazard Detection & Predictive Safety</p>
+            <div class="update-badge">
+                <span class="status-indicator"></span>
+                Latest Updates - October 16, 2025
+            </div>
+        </header>
+
+        <nav>
+            <ul>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#updates">Latest Updates</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#tech-stack">Tech Stack</a></li>
+                <li><a href="#getting-started">Getting Started</a></li>
+                <li><a href="#iot-integration">IoT Integration</a></li>
+                <li><a href="#api-docs">API Documentation</a></li>
+                <li><a href="#configuration">Configuration</a></li>
+                <li><a href="#contributing">Contributing</a></li>
+            </ul>
+        </nav>
+
+        <div class="content">
+            <section id="overview">
+                <h2>📋 Overview</h2>
+                <p>A comprehensive full-stack IoT safety monitoring system that uses AI to detect hazards, predict incidents, and ensure workplace safety in industrial environments. This system combines real-time sensor data, computer vision, and machine learning to create a proactive safety monitoring solution.</p>
+            </section>
+
+            <section id="updates">
+                <h2>🎉 Latest Updates (October 16, 2025)</h2>
+                
+                <div class="success-box">
+                    <h4>✅ Camera Feeds & Recent Violations - WORKING</h4>
+                    <ul>
+                        <li><strong>Database Seeding System:</strong> 6 cameras and 30+ sample detections automatically added</li>
+                        <li><strong>Real-Time Data Display:</strong> Camera grid and violations list show actual database data</li>
+                        <li><strong>Live YOLOv8 Detection:</strong> Working webcam integration with real-time object detection</li>
+                        <li><strong>Complete Statistics:</strong> All metrics powered by real database queries</li>
+                    </ul>
+                </div>
+
+                <div class="success-box">
+                    <h4>✅ Real-Time Reports & Analytics - WORKING</h4>
+                    <ul>
+                        <li><strong>Dynamic Data:</strong> No more mock data - everything pulls from the database in real-time</li>
+                        <li><strong>Multiple Time Periods:</strong> Filter by Today, Week, Month, Quarter, or Year</li>
+                        <li><strong>Interactive Charts:</strong> Incident trends and severity distribution with actual data</li>
+                        <li><strong>Auto-Refresh:</strong> Data updates every 30 seconds automatically</li>
+                        <li><strong>Comprehensive Analytics:</strong> Response times, critical violations, detection type breakdown</li>
+                    </ul>
+                </div>
+
+                <div class="info-box">
+                    <h4>📄 Detailed Documentation Available:</h4>
+                    <ul>
+                        <li><code>CAMERA_FEEDS_SETUP.md</code> - Complete camera feeds guide</li>
+                        <li><code>REPORTS_REALTIME_SETUP.md</code> - Complete reports guide</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="features">
+                <h2>🌟 Features</h2>
+
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>🎯 Dual Operating Modes</h4>
+                        <p><strong>Heavy Industry Mode:</strong> Gas leaks, vibration monitoring, temperature alerts, auto-shutdown</p>
+                        <p><strong>Shop Floor Mode:</strong> PPE detection, proximity alerts, fall detection, access control</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h4>📊 Real-Time Monitoring</h4>
+                        <ul>
+                            <li>Live sensor data from multiple sources</li>
+                            <li>WebSocket-based real-time updates</li>
+                            <li>Status indicators (Normal/Warning/Danger)</li>
+                            <li>Trend analysis and visualization</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <h4>🤖 AI-Powered Detection</h4>
+                        <ul>
+                            <li>Anomaly detection using machine learning</li>
+                            <li>Predictive analytics for incident prevention</li>
+                            <li>PPE detection</li>
+                            <li>Safety violation identification</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <h4>🚨 Alert System</h4>
+                        <ul>
+                            <li>Multi-level alerts (Info, Warning, Critical)</li>
+                            <li>Sound, email, and SMS notifications</li>
+                            <li>Alert acknowledgment and resolution tracking</li>
+                            <li>Historical alert analysis</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <h4>📈 Analytics & Reporting</h4>
+                        <ul>
+                            <li>Incident history and trends</li>
+                            <li>Sensor performance metrics</li>
+                            <li>Worker access logs (RFID)</li>
+                            <li>Customizable reports</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <h4>⚙️ System Features</h4>
+                        <ul>
+                            <li>Dark/Light theme</li>
+                            <li>Responsive design (Mobile, Tablet, Desktop)</li>
+                            <li>Configurable thresholds</li>
+                            <li>Auto-shutdown on critical alerts</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>📡 Supported Sensors</h3>
+                <ul>
+                    <li><strong>Gas Sensors:</strong> MQ-2/MQ-135 for detecting combustible gases and air quality</li>
+                    <li><strong>Temperature:</strong> DHT22 for ambient temperature and humidity monitoring</li>
+                    <li><strong>Vibration:</strong> SW-420 for detecting abnormal machinery vibrations</li>
+                    <li><strong>Ultrasonic:</strong> HC-SR04 for proximity detection and fall prevention</li>
+                    <li><strong>RFID:</strong> RC522 for worker access control and tracking</li>
+                    <li><strong>Environmental:</strong> Additional sensors for comprehensive monitoring</li>
+                </ul>
+            </section>
+
+            <section id="tech-stack">
+                <h2>🛠️ Tech Stack</h2>
+
+                <div class="tech-stack">
+                    <div class="tech-category">
+                        <h4>Frontend</h4>
+                        <ul class="tech-list">
+                            <li>React 18 + TypeScript</li>
+                            <li>Vite (Build Tool)</li>
+                            <li>Tailwind CSS v3.4</li>
+                            <li>React Context API</li>
+                            <li>Recharts (Data Visualization)</li>
+                            <li>Lucide React (Icons)</li>
+                            <li>React Hot Toast (Notifications)</li>
+                            <li>Axios (HTTP Client)</li>
+                        </ul>
+                    </div>
+
+                    <div class="tech-category">
+                        <h4>Backend</h4>
+                        <ul class="tech-list">
+                            <li>FastAPI (Python)</li>
+                            <li>PostgreSQL Database</li>
+                            <li>SQLAlchemy (Async ORM)</li>
+                            <li>Native WebSocket Support</li>
+                            <li>Scikit-learn</li>
+                            <li>TensorFlow</li>
+                            <li>OpenCV</li>
+                            <li>Pillow (Image Processing)</li>
+                        </ul>
+                    </div>
+
+                    <div class="tech-category">
+                        <h4>IoT Integration</h4>
+                        <ul class="tech-list">
+                            <li>ESP32 Microcontroller</li>
+                            <li>MQ-2/MQ-135 (Gas Sensors)</li>
+                            <li>DHT22 (Temperature)</li>
+                            <li>SW-420 (Vibration)</li>
+                            <li>HC-SR04 (Ultrasonic)</li>
+                            <li>RC522 (RFID)</li>
+                            <li>MQTT / HTTP JSON Protocol</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="project-structure">
+                <h2>📁 Project Structure</h2>
+                <pre><code>AI-Smart-Shop/
+├── frontend/                 # React TypeScript Frontend
+│   ├── src/
+│   │   ├── components/      # Reusable UI components
+│   │   ├── context/         # React Context providers
+│   │   ├── pages/           # Page components
+│   │   ├── services/        # API services
+│   │   ├── types/           # TypeScript type definitions
+│   │   └── App.tsx          # Main app component
+│   ├── public/
+│   ├── package.json
+│   └── tailwind.config.js
+│
+└── backend/                  # FastAPI Python Backend
+    ├── app/
+    │   ├── ai/              # AI/ML modules
+    │   ├── db/              # Database configuration
+    │   ├── models/          # SQLAlchemy models & Pydantic schemas
+    │   ├── routes/          # API endpoints
+    │   ├── services/        # Business logic
+    │   └── main.py          # FastAPI application
+    ├── tests/
+    ├── requirements.txt
+    └── .env.example</code></pre>
+            </section>
+
+            <section id="getting-started">
+                <h2>🚀 Getting Started</h2>
+
+                <h3>Prerequisites</h3>
+                <ul>
+                    <li>Node.js 18+ and npm</li>
+                    <li>Python 3.10+</li>
+                    <li>PostgreSQL 14+</li>
+                    <li>Git</li>
+                </ul>
+
+                <h3>Frontend Setup</h3>
+                <pre><code>cd frontend
+
+# Install dependencies
+npm install
+
+# Create environment file
+cp .env.example .env
+
+# Start development server
+npm run dev</code></pre>
+                <div class="info-box">
+                    The frontend will be available at <strong>http://localhost:5173</strong>
+                </div>
+
+                <h3>Backend Setup</h3>
+                <pre><code>cd backend
+
+# Create virtual environment
+python3 -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Create environment file
+cp .env.example .env
+
+# Edit .env with your PostgreSQL credentials
+nano .env
+
+# Create PostgreSQL database
+createdb ai_safety_monitoring
+
+# Run database migrations (if using Alembic)
+alembic upgrade head
+
+# Start the server
+uvicorn app.main:app --reload --host 0.0.0.0 --port 8000</code></pre>
+                <div class="info-box">
+                    <p>The backend API will be available at <strong>http://localhost:8000</strong></p>
+                    <p>API documentation: <strong>http://localhost:8000/docs</strong></p>
+                </div>
+
+                <h3>Database Setup (PostgreSQL)</h3>
+                <pre><code>-- Create database
+CREATE DATABASE ai_safety_monitoring;
+
+-- Create user (optional)
+CREATE USER safety_admin WITH PASSWORD 'your_password';
+GRANT ALL PRIVILEGES ON DATABASE ai_safety_monitoring TO safety_admin;</code></pre>
+            </section>
+
+            <section id="iot-integration">
+                <h2>📡 IoT Sensor Integration</h2>
+
+                <h3>ESP32 Setup</h3>
+                <ol>
+                    <li>Install Arduino IDE or PlatformIO</li>
+                    <li>Install required libraries:
+                        <ul>
+                            <li>WiFi</li>
+                            <li>HTTPClient / PubSubClient (MQTT)</li>
+                            <li>DHT sensor library</li>
+                            <li>MFRC522 (RFID)</li>
+                        </ul>
+                    </li>
+                </ol>
+
+                <h3>Sample ESP32 Code</h3>
+                <pre><code>// Send sensor data to backend
+void sendSensorData() {
+  HTTPClient http;
+  http.begin("http://your-server:8000/sensors");
+  http.addHeader("Content-Type", "application/json");
+  
+  String payload = "{\"sensor_type\":\"temperature\",\"value\":" + 
+                   String(temperature) + 
+                   ",\"unit\":\"°C\",\"status\":\"normal\"}";
+  
+  int httpCode = http.POST(payload);
+  http.end();
+}</code></pre>
+
+                <div class="alert-box">
+                    <strong>Note:</strong> Make sure to configure your WiFi credentials and server URL in the ESP32 code before uploading.
+                </div>
+            </section>
+
+            <section id="ui-features">
+                <h2>🎨 UI Screenshots & Features</h2>
+
+                <h3>Dashboard</h3>
+                <ul>
+                    <li>Real-time sensor cards with status indicators</li>
+                    <li>Live charts for each sensor</li>
+                    <li>Alert panel with active notifications</li>
+                    <li>Operating mode switcher</li>
+                    <li>Statistics overview</li>
+                </ul>
+
+                <h3>Reports</h3>
+                <ul>
+                    <li>Historical data analysis</li>
+                    <li>Incident breakdown by type</li>
+                    <li>Sensor performance metrics</li>
+                    <li>AI predictions display</li>
+                </ul>
+
+                <h3>Settings</h3>
+                <ul>
+                    <li>Configurable sensor thresholds</li>
+                    <li>Alert preferences (Email, SMS, Sound)</li>
+                    <li>System configuration</li>
+                    <li>Dark/Light mode toggle</li>
+                </ul>
+            </section>
+
+            <section id="configuration">
+                <h2>🔧 Configuration</h2>
+
+                <h3>Frontend (.env)</h3>
+                <pre><code>VITE_API_URL=http://localhost:8000</code></pre>
+
+                <h3>Backend (.env)</h3>
+                <pre><code>DATABASE_URL=postgresql://postgres:password@localhost:5432/ai_safety_monitoring
+API_PORT=8000
+CORS_ORIGINS=http://localhost:5173
+
+# Add other configurations from .env.example</code></pre>
+            </section>
+
+            <section id="testing">
+                <h2>🧪 Testing</h2>
+
+                <h3>Frontend Tests</h3>
+                <pre><code>cd frontend
+npm test</code></pre>
+
+                <h3>Backend Tests</h3>
+                <pre><code>cd backend
+pytest</code></pre>
+            </section>
+
+            <section id="api-docs">
+                <h2>📚 API Documentation</h2>
+                <p>Once the backend is running, visit:</p>
+                <ul>
+                    <li><strong>Swagger UI:</strong> <a href="http://localhost:8000/docs" target="_blank">http://localhost:8000/docs</a></li>
+                    <li><strong>ReDoc:</strong> <a href="http://localhost:8000/redoc" target="_blank">http://localhost:8000/redoc</a></li>
+                </ul>
+
+                <h3>Key Endpoints</h3>
+                <div class="endpoint-card">
+                    <span class="endpoint-method get">GET</span>
+                    <code>/sensors</code> - Get all sensor data
+                </div>
+                <div class="endpoint-card">
+                    <span class="endpoint-method get">GET</span>
+                    <code>/sensors/{type}/history</code> - Get sensor history
+                </div>
+                <div class="endpoint-card">
+                    <span class="endpoint-method get">GET</span>
+                    <code>/alerts/active</code> - Get active alerts
+                </div>
+                <div class="endpoint-card">
+                    <span class="endpoint-method post">POST</span>
+                    <code>/sensors</code> - Submit sensor data (from ESP32)
+                </div>
+                <div class="endpoint-card">
+                    <span class="endpoint-method ws">WS</span>
+                    <code>/ws</code> - WebSocket for real-time updates
+                </div>
+            </section>
+
+            <section id="contributing">
+                <h2>🤝 Contributing</h2>
+                <ol>
+                    <li>Fork the repository</li>
+                    <li>Create a feature branch (<code>git checkout -b feature/AmazingFeature</code>)</li>
+                    <li>Commit your changes (<code>git commit -m 'Add some AmazingFeature'</code>)</li>
+                    <li>Push to the branch (<code>git push origin feature/AmazingFeature</code>)</li>
+                    <li>Open a Pull Request</li>
+                </ol>
+            </section>
+
+            <section id="license">
+                <h2>📄 License</h2>
+                <p>This project is licensed under the MIT License - see the LICENSE file for details.</p>
+            </section>
+
+            <section id="acknowledgments">
+                <h2>🙏 Acknowledgments</h2>
+                <ul>
+                    <li>FastAPI documentation</li>
+                    <li>React and Vite teams</li>
+                    <li>Tailwind CSS</li>
+                    <li>Open source community</li>
+                </ul>
+            </section>
+        </div>
+
+        <footer>
+            <h3>Ready to Get Started?</h3>
+            <p>Download the project and start building safer workplaces with AI-powered monitoring.</p>
+            <div style="margin-top: 20px;">
+                <a href="http://localhost:8000/docs" class="button">API Documentation</a>
+                <a href="http://localhost:5173" class="button">Launch Application</a>
+            </div>
+            <p style="margin-top: 30px; color: #666;">
+                Made with ❤️ for Industrial Safety | © 2025
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
