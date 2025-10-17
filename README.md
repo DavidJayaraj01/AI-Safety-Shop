@@ -1199,6 +1199,19 @@ If you find this project useful, please consider giving it a ⭐!
 - [ ] Historical trend analysis
 
 ---
+## 👥 Authors
+
+- **David Jayaraj A**  
+  🔗 GitHub: [https://github.com/Klassy01](https://github.com/Klassy01)
+
+- **Balu K**  
+  🔗 GitHub: [https://github.com/BaluK345](https://github.com/BaluK345)
+
+- **John Jusvin J**  
+  🔗 GitHub: [https://github.com/johnjusvin](https://github.com/johnjusvin)
+
+- **Jerwin Titus D**  
+  🔗 GitHub: [https://github.com/JerwinTitus2006](https://github.com/JerwinTitus2006)
 
 <div align="center">
 
