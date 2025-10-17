@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
-  Settings as SettingsIcon,
   Bell,
   Zap,
   Database,
@@ -15,15 +14,15 @@ import { useModeContext } from '../context/ModeContext';
 import toast from 'react-hot-toast';
 
 const Settings = () => {
-  const { mode, modeConfig, toggleMode, isDarkMode, toggleDarkMode } = useModeContext();
+  const { modeConfig, toggleMode, isDarkMode, toggleDarkMode } = useModeContext();
 
   const [settings, setSettings] = useState({
     // Alert Settings
     enableSoundAlerts: true,
     enableEmailAlerts: true,
     enableSMSAlerts: false,
-    alertEmailAddress: 'admin@safetysystem.com',
-    alertPhoneNumber: '+1234567890',
+    alertEmailAddress: 'davidjayaraj01@gmail.com',
+    alertPhoneNumber: '9840488355',
     
     // Threshold Settings
     gasWarningThreshold: 50,
@@ -53,7 +52,7 @@ const Settings = () => {
 
   const [hasChanges, setHasChanges] = useState(false);
 
-  const handleInputChange = (field, value) => {
+  const handleInputChange = (field: string, value: string | number | boolean) => {
     setSettings(prev => ({ ...prev, [field]: value }));
     setHasChanges(true);
   };

@@ -31,7 +31,6 @@ const CVMonitoring: React.FC = () => {
   const [filterAcknowledged, setFilterAcknowledged] = useState<boolean>(false);
   
   // YOLO Detection State
-  const [detectorStatus, setDetectorStatus] = useState<any>(null);
   const [streamStatus, setStreamStatus] = useState<any>(null);
   
   // Live Camera State
